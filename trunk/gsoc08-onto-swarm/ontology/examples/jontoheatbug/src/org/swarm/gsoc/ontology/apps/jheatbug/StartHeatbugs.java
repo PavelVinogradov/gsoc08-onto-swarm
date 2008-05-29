@@ -1,13 +1,13 @@
-package org.swarm.gsoc.ontology.apps.jheatbug;
-
 // jheatbugs-3.0
-
-// Java Heatbugs program. Copyright � 1999-2000 Swarm Development Group.
+//
+// Java Heatbugs application. Copyright � 1999-2000 Swarm Development Group.
 // This library is distributed without any warranty; without even the
 // implied warranty of merchantability or fitness for a particular
 // purpose.  See file COPYING for details and terms of copying.
-
+//
 // Changes (from jheatbugs-2001-03-28) by Timothy Howe. 
+
+package org.swarm.gsoc.ontology.apps.jheatbug;
 
 import swarm.Globals;
 import swarm.objectbase.Swarm;
