@@ -306,7 +306,7 @@ public Object buildObjects ()
      (getZone (),
       _worldRaster,
       _heatbugModelSwarm.getWorld (),
-      new Selector (Class.forName ("Heatbug"), "drawSelfOn", false)
+      new Selector (Class.forName ("org.swarm.gsoc.ontology.apps.jheatbug.Heatbug"), "drawSelfOn", false)
      );
     } catch (Exception e)
     {
@@ -367,7 +367,7 @@ public Object buildObjects ()
     _unhappyGraph.createAverageSequence$withFeedFrom$andSelector
      ("unhappiness", 
       _heatbugModelSwarm.getHeatbugList (),
-      new Selector (Class.forName ("Heatbug"), "getUnhappiness", false)
+      new Selector (Class.forName ("org.swarm.gsoc.ontology.apps.jheatbug.Heatbug"), "getUnhappiness", false)
      );
     } catch (Exception e)
     {
