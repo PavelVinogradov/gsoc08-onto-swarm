@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="build_and_run">
+	<target name="build_and_run" depends="compile, build, run" description="Build and run jheatbug">
+		<echo>"Build swarm"</echo>		
+	</target>
+	
+	<target name="compile">
+		<javac srcdir="src"/>
+	</target>
+	
+	<target name="build">
+		<jar jarfile="jheatbug.jar" basedir="src" include="*.class"/> 
+	</target>
+	
+	<target name="run">		
+	</target>
+	
+</project>
