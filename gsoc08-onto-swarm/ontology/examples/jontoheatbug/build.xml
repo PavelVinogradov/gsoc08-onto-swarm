@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="build_and_run">
-	<target name="build_and_run" depends="compile, build, run" description="Build and run jheatbug">
-		<echo>"Build swarm"</echo>		
-	</target>
+
+	<property file="build.properties" />
 	
-	<target name="compile">
-		<javac srcdir="src"/>
+	<target name="build_and_run" depends="compile, build, run" description="Build and run project">
+		<echo>"Build ${project.name}"</echo>
 	</target>
-	
+
+	<target name="clear">
+		<delete dir="build" />
+		<delete file="${project.jar}" />
+	</target>
+
+	<target name="compile" depends="clear">
+		<mkdir dir="build" />		
+		<javac srcdir="src" destdir="build" classpath="${swarm.lib.path}/${swarm.lib.jar}" />
+	</target>
+
 	<target name="build">
-		<jar jarfile="jheatbug.jar" basedir="src" include="*.class"/> 
+		<jar jarfile="${project.jar}" basedir="build" includes="**/*.class">
+			<manifest>
+				<attribute name="Build-By" value="${project.developer}" />
+				<attribute name="Main-Class" value="${project.jar.mainclass}" />
+				<attribute name="Class-Path" value="${swarm.lib.path}/${swarm.lib.jar}"/>
+			</manifest>
+		</jar>
 	</target>
-	
+
 	<target name="run">		
+		<java jar="${project.jar}" fork="true" failonerror="true" maxmemory="128m">					
+			<jvmarg value="-Djava.library.path=${swarm.native.path}" />
+		</java>
 	</target>
-	
+
 </project>
