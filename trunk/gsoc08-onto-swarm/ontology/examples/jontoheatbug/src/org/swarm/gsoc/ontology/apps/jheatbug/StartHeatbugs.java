@@ -14,6 +14,7 @@ import swarm.objectbase.Swarm;
 import swarm.objectbase.SwarmImpl;
 import swarm.simtoolsgui.GUISwarm;
 import swarm.simtoolsgui.GUISwarmImpl;
+import org.swarm.gsoc.ontology.apps.Utils;
 
 /**
 
@@ -163,13 +164,14 @@ public static void main (String[] args)
     Globals.env.initSwarm
      ("jheatbugs", "2.1", "bug-swarm@swarm.org", args);
     HeatbugModelSwarm model;
-
+    
     if (Globals.env.guiFlag)
     {
         // We want graphics, so make an ObserverSwarm to get GUI objects:
-        HeatbugObserverSwarm topLevelSwarm
+        HeatbugObserverSwarm topLevelSwarm 
          = new HeatbugObserverSwarm (Globals.env.globalZone);
         Globals.env.setWindowGeometryRecordName (topLevelSwarm, "topLevelSwarm");
+
         model = topLevelSwarm.getHeatbugModelSwarm ();
         build (topLevelSwarm, model);
         topLevelSwarm.go ();
@@ -181,6 +183,7 @@ public static void main (String[] args)
         HeatbugBatchSwarm topLevelSwarm
          = (HeatbugBatchSwarm) Globals.env.lispAppArchiver.getWithZone$key
          (Globals.env.globalZone, "batchSwarm");
+        
         model = topLevelSwarm.getHeatbugModelSwarm ();
         build (topLevelSwarm, model);
         topLevelSwarm.go ();
@@ -200,25 +203,25 @@ private static void build (Swarm swarm, HeatbugModelSwarm model)
     // We could pass immobile to the batch buildObjects(), but we get a compile
     // error if we try to pass it to the GUI buildObjects(). So instead we use 
     // setImmobile() for both:
-    model.setImmobile (getBooleanProperty ("i", false));
+    model.setImmobile (Utils.getBooleanProperty ("i", false));
 
-    model.setPrintDiagnostics (getIntProperty ("p", 0));
+    model.setPrintDiagnostics (Utils.getIntProperty ("p", 0));
 
-    model.setStartInOneCluster (getBooleanProperty ("c", false));
+    model.setStartInOneCluster (Utils.getBooleanProperty ("c", false));
 
     model.setRandomMoveProbability 
-     (getDoubleProperty ("r", model.getRandomMoveProbability ()));
+     (Utils.getDoubleProperty ("r", model.getRandomMoveProbability ()));
       // ... In cases such as this, when we happen not to want to override any 
       // default set by HeatbugModelSwarm, we apply that value as our own 
       // default. 
 
     model.setDiffusionConstant 
-     (getDoubleProperty ("d", model.getDiffusionConstant ()));
+     (Utils.getDoubleProperty ("d", model.getDiffusionConstant ()));
 
     model.setEvaporationRate 
-     (getDoubleProperty ("e", model.getEvaporationRate ()));
+     (Utils.getDoubleProperty ("e", model.getEvaporationRate ()));
 
-    model.setNumBugs (getIntProperty ("n", -1));
+    model.setNumBugs (Utils.getIntProperty ("n", -1));
     // ... The special value -1 tells HeatbugModelSwarm to use its own default
     // value for numBugs. Use of Integer rather than int would avoid the need
     // for this special value. 
@@ -231,35 +234,6 @@ private static void build (Swarm swarm, HeatbugModelSwarm model)
 private static void unbuild (Swarm swarm, HeatbugModelSwarm model)
 {
     swarm.drop ();
-}
-
-/**
-This method and the other get...Property() methods are generic convenience
-methods that would normally be defined in some utility library.
-*/
-private static boolean getBooleanProperty (String propertyName, boolean dflt)
-{
-    String property = System.getProperty (propertyName);
-    if (property == null || property.equals ("")) return dflt;
-    else return property.equals ("true") || property.equals ("1");
-}
-private static double getDoubleProperty (String propertyName, double dflt)
-{
-    String property = System.getProperty (propertyName);
-    if (property == null || property.equals ("")) return dflt;
-    else return Double.parseDouble (property);
-}
-private static int getIntProperty (String propertyName, int dflt)
-{
-    String property = System.getProperty (propertyName);
-    if (property == null || property.equals ("")) return dflt;
-    else return Integer.parseInt (property);
-}
-private static String getStringProperty (String propertyName, String dflt)
-{
-    String property = System.getProperty (propertyName);
-    if (property == null) return dflt;
-    return property;
 }
 
 }
