@@ -1,0 +1,5 @@
+public class TobascoPepperSauce extends SauceTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Hot) {}
+
+}

@@ -1,0 +1,5 @@
+public class MushroomTopping extends VegetableTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
+
+}

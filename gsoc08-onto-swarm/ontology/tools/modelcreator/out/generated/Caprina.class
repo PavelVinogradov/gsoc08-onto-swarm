@@ -1,0 +1,13 @@
+public class Caprina extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping GoatsCheeseTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping SundriedTomatoTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(GoatsCheeseTopping MozzarellaTopping SundriedTomatoTopping TomatoTopping)) {}
+
+}

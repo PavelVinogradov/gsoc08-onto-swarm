@@ -1,0 +1,5 @@
+public class SweetPepperTopping extends PepperTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
+
+}

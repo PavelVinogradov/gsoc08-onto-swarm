@@ -1,0 +1,5 @@
+public class FourCheesesTopping extends CheeseTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
+
+}

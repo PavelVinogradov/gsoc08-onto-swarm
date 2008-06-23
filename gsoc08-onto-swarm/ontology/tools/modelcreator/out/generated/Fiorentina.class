@@ -1,0 +1,17 @@
+public class Fiorentina extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping GarlicTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping OliveTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping ParmesanTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping SpinachTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(GarlicTopping MozzarellaTopping OliveTopping ParmesanTopping SpinachTopping TomatoTopping)) {}
+
+}

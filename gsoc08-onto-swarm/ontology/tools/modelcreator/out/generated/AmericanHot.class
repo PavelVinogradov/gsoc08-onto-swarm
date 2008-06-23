@@ -1,0 +1,17 @@
+public class AmericanHot extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping HotGreenPepperTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping JalapenoPepperTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping PeperoniSausageTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(HotGreenPepperTopping JalapenoPepperTopping MozzarellaTopping PeperoniSausageTopping TomatoTopping)) {}
+
+	public void ObjectHasValue(hasCountryOfOrigin America) {}
+
+}

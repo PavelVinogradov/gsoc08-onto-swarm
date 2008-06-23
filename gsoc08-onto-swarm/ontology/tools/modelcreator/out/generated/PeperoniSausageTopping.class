@@ -1,0 +1,5 @@
+public class PeperoniSausageTopping extends MeatTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Medium) {}
+
+}

@@ -1,0 +1,19 @@
+public class FourSeasons extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping AnchoviesTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping CaperTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping MushroomTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping OliveTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping PeperoniSausageTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(AnchoviesTopping CaperTopping MozzarellaTopping MushroomTopping OliveTopping PeperoniSausageTopping TomatoTopping)) {}
+
+}

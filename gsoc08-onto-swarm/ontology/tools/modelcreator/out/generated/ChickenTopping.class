@@ -1,0 +1,5 @@
+public class ChickenTopping extends MeatTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
+
+}
