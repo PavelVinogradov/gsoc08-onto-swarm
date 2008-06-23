@@ -59,27 +59,27 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="SwarmExample.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/coode/owlapi/examples/SwarmExample.java">
+        <entry file="file://$PROJECT_DIR$/src/org/swarm/gsoc/ontology/model/SwarmExample.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="35" selection-start="744" selection-end="744" vertical-scroll-proportion="0.14609572">
+            <state line="27" column="70" selection-start="783" selection-end="783" vertical-scroll-proportion="0.48737863">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Clazz.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/coode/owlapi/examples/Clazz.java">
+        <entry file="file://$PROJECT_DIR$/src/org/swarm/gsoc/ontology/model/Clazz.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="45" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.4672544">
+            <state line="39" column="45" selection-start="1034" selection-end="1034" vertical-scroll-proportion="0.72038835">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Method.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/coode/owlapi/examples/Method.java">
+        <entry file="file://$PROJECT_DIR$/src/org/swarm/gsoc/ontology/model/Method.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="22" selection-start="646" selection-end="646" vertical-scroll-proportion="0.49118388">
+            <state line="26" column="22" selection-start="650" selection-end="650" vertical-scroll-proportion="0.75728154">
               <folding />
             </state>
           </provider>
@@ -154,10 +154,6 @@
           <option name="myItemId" value="PsiDirectory:/home/blaze/devel/IdeaProjects/OwlModelGenerator/src" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/home/blaze/devel/IdeaProjects/OwlModelGenerator/src/org/coode/owlapi/examples" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
       </PATH>
     </subPane>
   </component>
@@ -186,9 +182,14 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.swarm.gsoc.ontology.model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.SwarmExample">
     <tempConfiguration default="false" name="SwarmExample" type="Application" factoryName="Application" enabled="false" merge="false">
-      <option name="MAIN_CLASS_NAME" value="org.coode.owlapi.examples.SwarmExample" />
+      <option name="MAIN_CLASS_NAME" value="org.swarm.gsoc.ontology.model.SwarmExample" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -217,6 +218,13 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
     </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -235,13 +243,38 @@
         <value defaultName="wholeProject" />
       </option>
       <envs />
+      <method>
+        <option name="Make" value="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
+    <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method>
+        <option name="Make" value="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
@@ -322,7 +355,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1280" height="974" extended-state="1" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
@@ -338,12 +371,12 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959083" order="0" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959083" order="0" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32971016" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32969698" order="2" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
@@ -376,23 +409,23 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/org/coode/owlapi/examples/Clazz.java">
+    <entry file="file://$PROJECT_DIR$/src/org/swarm/gsoc/ontology/model/Clazz.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="45" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.4672544">
+        <state line="39" column="45" selection-start="1034" selection-end="1034" vertical-scroll-proportion="0.72038835">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/coode/owlapi/examples/Method.java">
+    <entry file="file://$PROJECT_DIR$/src/org/swarm/gsoc/ontology/model/Method.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="22" selection-start="646" selection-end="646" vertical-scroll-proportion="0.49118388">
+        <state line="26" column="22" selection-start="650" selection-end="650" vertical-scroll-proportion="0.75728154">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/coode/owlapi/examples/SwarmExample.java">
+    <entry file="file://$PROJECT_DIR$/src/org/swarm/gsoc/ontology/model/SwarmExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="35" selection-start="744" selection-end="744" vertical-scroll-proportion="0.14609572">
+        <state line="27" column="70" selection-start="783" selection-end="783" vertical-scroll-proportion="0.48737863">
           <folding />
         </state>
       </provider>
