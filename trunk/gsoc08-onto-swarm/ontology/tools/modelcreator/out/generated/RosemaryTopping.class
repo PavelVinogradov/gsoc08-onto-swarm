@@ -1,5 +1,0 @@
-public class RosemaryTopping extends HerbSpiceTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
-
-}

@@ -1,5 +1,0 @@
-public class OnionTopping extends VegetableTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Medium) {}
-
-}

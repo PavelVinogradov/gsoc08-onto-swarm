@@ -1,5 +1,0 @@
-public class UnclosedPizza extends NamedPizza
-{ 
-	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
-
-}

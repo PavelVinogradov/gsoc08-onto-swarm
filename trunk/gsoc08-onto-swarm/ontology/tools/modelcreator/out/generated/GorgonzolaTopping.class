@@ -1,5 +1,0 @@
-public class GorgonzolaTopping extends CheeseTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
-
-}

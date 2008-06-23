@@ -1,5 +1,0 @@
-public class JalapenoPepperTopping extends PepperTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Hot) {}
-
-}

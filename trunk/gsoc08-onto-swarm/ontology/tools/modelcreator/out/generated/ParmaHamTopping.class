@@ -1,5 +1,0 @@
-public class ParmaHamTopping extends HamTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
-
-}
