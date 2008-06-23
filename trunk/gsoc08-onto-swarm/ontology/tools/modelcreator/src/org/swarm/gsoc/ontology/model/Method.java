@@ -1,4 +1,4 @@
-package org.coode.owlapi.examples;
+package org.swarm.gsoc.ontology.model;
 
 /**
  * Created by NixDev.net.

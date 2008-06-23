@@ -1,4 +1,4 @@
-package org.coode.owlapi.examples;
+package org.swarm.gsoc.ontology.model;
 
 import org.semanticweb.owl.model.*;
 import org.semanticweb.owl.apibinding.OWLManager;
@@ -32,7 +32,7 @@ public class SwarmExample {
 
             // We load an ontology from a physical URI - in this case we'll load the pizza
             // ontology.
-            URI physicalURI = URI.create("file:/home/blaze/pizza.owl");
+            URI physicalURI = URI.create("file:pizza.owl");
 
             // Now ask the manager to load the ontology
             OWLOntology ontology = manager.loadOntologyFromPhysicalURI(physicalURI);

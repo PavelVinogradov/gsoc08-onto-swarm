@@ -1,4 +1,4 @@
-package org.coode.owlapi.examples;
+package org.swarm.gsoc.ontology.model;
 
 import java.util.List;
 import java.util.ArrayList;
