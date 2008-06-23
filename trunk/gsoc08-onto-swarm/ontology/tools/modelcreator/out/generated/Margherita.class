@@ -1,0 +1,9 @@
+public class Margherita extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(MozzarellaTopping TomatoTopping)) {}
+
+}

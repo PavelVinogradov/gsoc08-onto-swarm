@@ -1,0 +1,5 @@
+public class RocketTopping extends VegetableTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Medium) {}
+
+}

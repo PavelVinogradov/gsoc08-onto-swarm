@@ -1,0 +1,5 @@
+public class SultanaTopping extends FruitTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Medium) {}
+
+}

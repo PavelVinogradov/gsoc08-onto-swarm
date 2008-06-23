@@ -1,0 +1,5 @@
+public class PeperonataTopping extends PepperTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Medium) {}
+
+}

@@ -1,0 +1,19 @@
+public class PolloAdAstra extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping CajunSpiceTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping ChickenTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping GarlicTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping RedOnionTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping SweetPepperTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(CajunSpiceTopping ChickenTopping GarlicTopping MozzarellaTopping RedOnionTopping SweetPepperTopping TomatoTopping)) {}
+
+}

@@ -1,0 +1,21 @@
+public class Veneziana extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping CaperTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping OliveTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping OnionTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping PineKernels) {}
+
+	public void ObjectSomeValueFrom(hasTopping SultanaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(CaperTopping MozzarellaTopping OliveTopping OnionTopping PineKernels SultanaTopping TomatoTopping)) {}
+
+	public void ObjectHasValue(hasCountryOfOrigin Italy) {}
+
+}

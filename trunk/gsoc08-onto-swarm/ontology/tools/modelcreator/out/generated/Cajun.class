@@ -1,0 +1,17 @@
+public class Cajun extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping OnionTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping PeperonataTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping PrawnsTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TobascoPepperSauce) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(MozzarellaTopping OnionTopping PeperonataTopping PrawnsTopping TobascoPepperSauce TomatoTopping)) {}
+
+}

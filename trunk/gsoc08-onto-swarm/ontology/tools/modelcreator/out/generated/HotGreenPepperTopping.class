@@ -1,0 +1,5 @@
+public class HotGreenPepperTopping extends GreenPepperTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Hot) {}
+
+}

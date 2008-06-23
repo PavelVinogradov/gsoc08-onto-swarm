@@ -1,0 +1,17 @@
+public class Napoletana extends NamedPizza
+{ 
+	public void ObjectSomeValueFrom(hasTopping AnchoviesTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping CaperTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping MozzarellaTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping OliveTopping) {}
+
+	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
+
+	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(AnchoviesTopping CaperTopping MozzarellaTopping OliveTopping TomatoTopping)) {}
+
+	public void ObjectHasValue(hasCountryOfOrigin Italy) {}
+
+}

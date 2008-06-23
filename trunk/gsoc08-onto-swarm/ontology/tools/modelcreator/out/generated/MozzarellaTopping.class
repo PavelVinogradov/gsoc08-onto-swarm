@@ -1,0 +1,7 @@
+public class MozzarellaTopping extends CheeseTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
+
+	public void ObjectHasValue(hasCountryOfOrigin Italy) {}
+
+}

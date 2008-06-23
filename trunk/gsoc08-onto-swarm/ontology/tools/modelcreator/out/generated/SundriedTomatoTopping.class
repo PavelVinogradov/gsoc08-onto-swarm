@@ -1,0 +1,5 @@
+public class SundriedTomatoTopping extends TomatoTopping
+{ 
+	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
+
+}
