@@ -1,5 +1,0 @@
-public class HotSpicedBeefTopping extends MeatTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Hot) {}
-
-}

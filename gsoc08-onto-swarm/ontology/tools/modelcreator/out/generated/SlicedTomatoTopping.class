@@ -1,5 +1,0 @@
-public class SlicedTomatoTopping extends TomatoTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
-
-}

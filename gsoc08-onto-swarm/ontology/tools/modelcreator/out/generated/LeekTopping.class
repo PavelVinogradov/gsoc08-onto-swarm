@@ -1,5 +1,0 @@
-public class LeekTopping extends VegetableTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
-
-}

@@ -1,5 +1,0 @@
-public class CajunSpiceTopping extends HerbSpiceTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Hot) {}
-
-}

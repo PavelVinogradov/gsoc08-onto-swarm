@@ -1,5 +1,0 @@
-public class CaperTopping extends VegetableTopping
-{ 
-	public void ObjectSomeValueFrom(hasSpiciness Mild) {}
-
-}

@@ -1,9 +1,0 @@
-public class QuattroFormaggi extends NamedPizza
-{ 
-	public void ObjectSomeValueFrom(hasTopping FourCheesesTopping) {}
-
-	public void ObjectSomeValueFrom(hasTopping TomatoTopping) {}
-
-	public void ObjectAllValuesFrom(hasTopping ObjectUnionOf(FourCheesesTopping TomatoTopping)) {}
-
-}

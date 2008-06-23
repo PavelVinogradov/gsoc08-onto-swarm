@@ -1,5 +1,0 @@
-public class IceCream extends Food
-{ 
-	public void ObjectSomeValueFrom(hasTopping FruitTopping) {}
-
-}
