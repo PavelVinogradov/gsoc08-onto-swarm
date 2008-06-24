@@ -130,7 +130,7 @@ public int findExtremeType$X$Y (int type, Point targetCell, Grid2d world)
 
     // Scan through the 9-cell neighborhood, keeping a list of all cells
     // that tie for most extreme:
-    ArrayList heatList = new ArrayList ();
+    ArrayList<Point> heatList = new ArrayList<Point> ();
 
     for (y = targetCell.y - 1; y <= targetCell.y + 1; y++)
     {

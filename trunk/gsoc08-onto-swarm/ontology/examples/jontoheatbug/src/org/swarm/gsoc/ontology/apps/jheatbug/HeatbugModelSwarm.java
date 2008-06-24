@@ -12,15 +12,11 @@ package org.swarm.gsoc.ontology.apps.jheatbug;
 import swarm.Globals;
 import swarm.Selector;
 import swarm.defobj.Zone;
-import swarm.defobj.SymbolImpl;
 
-import swarm.defobj.FArguments;
 import swarm.defobj.FArgumentsImpl;
-import swarm.defobj.FCall;
 import swarm.defobj.FCallImpl;
 
 import swarm.activity.Activity;
-import swarm.activity.ScheduleActivity;
 import swarm.activity.ActionGroup;
 import swarm.activity.ActionGroupImpl;
 import swarm.activity.Schedule;
@@ -213,8 +209,8 @@ public double evaporationRate = 0.99;
 // average of the 8 neighbours" -- but what does "weighted" mean?
 
 private Schedule _modelSchedule;
-private ArrayList _heatbugList;
-    public ArrayList getHeatbugList ()
+private ArrayList<Heatbug> _heatbugList;
+    public ArrayList<Heatbug> getHeatbugList ()
     { return _heatbugList; }
 private Grid2d _world;
     public Grid2d getWorld ()
@@ -716,7 +712,7 @@ public Object buildObjects ()
      );
 
     // Create a list to keep track of the Heatbugs:
-    _heatbugList = new ArrayList ();
+    _heatbugList = new ArrayList<Heatbug> ();
 
     int x = 0;
     int y = 0;

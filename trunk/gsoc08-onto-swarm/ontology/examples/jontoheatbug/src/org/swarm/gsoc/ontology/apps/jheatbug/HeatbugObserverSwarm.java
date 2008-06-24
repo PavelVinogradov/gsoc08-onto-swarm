@@ -34,7 +34,6 @@ import swarm.gui.ZoomRasterImpl;
 import swarm.analysis.EZGraph;
 import swarm.analysis.EZGraphImpl;
 
-import swarm.simtoolsgui.GUISwarm;
 import swarm.simtoolsgui.GUISwarmImpl;
 
 import swarm.space.Value2dDisplay;
@@ -259,7 +258,7 @@ public Object buildObjects ()
     // the ideal temperature, the more the yellow):
     double tempRange 
      = _heatbugModelSwarm.maxIdealTemp - _heatbugModelSwarm.minIdealTemp;
-    ArrayList heatbugList = _heatbugModelSwarm.getHeatbugList ();
+    ArrayList<Heatbug> heatbugList = _heatbugModelSwarm.getHeatbugList ();
     for (int i = 0; i < heatbugList.size (); i++)
     {
         Heatbug bug = (Heatbug) heatbugList.get (i);

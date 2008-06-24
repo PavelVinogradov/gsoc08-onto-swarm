@@ -11,9 +11,6 @@ package org.swarm.gsoc.ontology.apps.jheatbug;
 
 import swarm.Globals;
 import swarm.objectbase.Swarm;
-import swarm.objectbase.SwarmImpl;
-import swarm.simtoolsgui.GUISwarm;
-import swarm.simtoolsgui.GUISwarmImpl;
 import org.swarm.gsoc.ontology.apps.Utils;
 
 /**
