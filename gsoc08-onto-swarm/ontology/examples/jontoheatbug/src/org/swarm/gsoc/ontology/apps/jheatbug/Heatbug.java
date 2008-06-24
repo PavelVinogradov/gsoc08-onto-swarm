@@ -13,7 +13,6 @@ import java.awt.*;
 
 import swarm.Globals;
 import swarm.space.Grid2d;
-import swarm.space.Grid2dImpl;
 import swarm.gui.Raster;
 
 /**
@@ -177,7 +176,7 @@ public synchronized void heatbugStep ()
     int heatHere = _heatSpace.getValueAtX$Y (x, y);
 
     // Update my current unhappiness:
-    int step = _model.getActivity ().getScheduleActivity ().getCurrentTime ();
+    // int step = _model.getActivity ().getScheduleActivity ().getCurrentTime ();
     unhappiness = Math.abs (idealTemperature - heatHere);
 
     if (unhappiness != 0 && ! _model.getImmobile ())
