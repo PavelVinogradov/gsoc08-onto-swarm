@@ -2,13 +2,11 @@ package org.swarm.gsoc.ontology.model;
 
 import org.semanticweb.owl.model.*;
 import org.semanticweb.owl.apibinding.OWLManager;
-import org.swarm.gsoc.ontology.model.visitors.RestrictionVisitor;
 
 import java.net.URI;
 import java.util.Set;
 import java.util.List;
 import java.util.LinkedList;
-import java.util.Collections;
 
 import uk.ac.manchester.cs.owl.OWLClassImpl;
 import uk.ac.manchester.cs.owl.OWLObjectSomeRestrictionImpl;
