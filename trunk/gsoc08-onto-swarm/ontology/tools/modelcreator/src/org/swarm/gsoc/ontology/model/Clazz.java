@@ -17,6 +17,7 @@ public class Clazz {
     public List<String> classInterfaces = new ArrayList<String>();
     public String classExtend;
     public List<Method> classMethods = new ArrayList<Method>();
+    public List<Variable> classVariables = new ArrayList<Variable>();
 
     @Override
     public String toString () {
@@ -36,11 +37,43 @@ public class Clazz {
 
         result += "{ \n";
 
+        for (Variable var: classVariables) {
+            result += var.toString() + "\n";
+        }
+
         for (Method method: classMethods) {
             result += method.toString() + "\n";
         }
 
         result += "}\n";
+
+        return result;
+    }
+
+    public boolean addMethod(Method method) {
+        if (classMethods.contains(method)) {
+            return false;
+        } else {
+            return classMethods.add(method);
+        }
+    }
+
+    public boolean addVariable(Variable variable) {
+        Boolean result = true;
+
+        if (classVariables.contains(variable)) {
+            result = false;
+        } else {
+            result = classVariables.add(variable);
+            Method getter = new Method("get"+variable.variableName,
+                    "return " + variable.variableName + ";", variable.variableType);
+            Method setter = new Method("set"+variable.variableName,
+                    "this." + variable.variableName + " = " + variable.variableName + ";", null);
+            setter.methodArg.add(variable);
+            
+            addMethod(getter);
+            addMethod(setter);
+        }
 
         return result;
     }
