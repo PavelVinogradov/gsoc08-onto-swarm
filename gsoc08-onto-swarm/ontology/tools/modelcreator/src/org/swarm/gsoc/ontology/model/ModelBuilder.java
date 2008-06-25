@@ -2,13 +2,17 @@ package org.swarm.gsoc.ontology.model;
 
 import org.semanticweb.owl.model.*;
 import org.semanticweb.owl.apibinding.OWLManager;
+import org.swarm.gsoc.ontology.model.visitors.RestrictionVisitor;
 
 import java.net.URI;
 import java.util.Set;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Collections;
 
 import uk.ac.manchester.cs.owl.OWLClassImpl;
+import uk.ac.manchester.cs.owl.OWLObjectSomeRestrictionImpl;
+import uk.ac.manchester.cs.owl.OWLDataAllRestrictionImpl;
 
 /**
  * Created by NixDev.net.
@@ -17,9 +21,9 @@ import uk.ac.manchester.cs.owl.OWLClassImpl;
  * Time: 21:44:06
  */
 
-public class SwarmExample {
+public class ModelBuilder {
 
-    public static List<Clazz> clazzez = new LinkedList<Clazz>();
+    public static List<Clazz> model = new LinkedList<Clazz>();
 
     public static void main(String[] args) {
         try {
@@ -32,31 +36,43 @@ public class SwarmExample {
 
             // We load an ontology from a physical URI - in this case we'll load the pizza
             // ontology.
-            URI physicalURI = URI.create("file:pizza.owl");
+            URI physicalURI = URI.create("file:/home/blaze/heatbug.owl");
+            //URI physicalURI = URI.create("file:/home/blaze/pizza.owl");
 
             // Now ask the manager to load the ontology
             OWLOntology ontology = manager.loadOntologyFromPhysicalURI(physicalURI);
             // Print out all of the classes which are referenced in the ontology
 
-            Clazz clazz;
-
             for(OWLClass cls : ontology.getReferencedClasses()) {
-                clazz = new Clazz();
+                Clazz clazz = new Clazz();
                 clazz.className = cls.toString();
 
-                Set<OWLDescription> superClasses = cls.getSuperClasses(ontology);
+                Set<OWLDescription> superClasses = cls.getSuperClasses(ontology);                
 
                 for(OWLDescription desc : superClasses) {
-                    if (desc instanceof OWLClassImpl)
-                        clazz.classExtend = desc.toString();
-                    else {
-                        Method method = new Method();
-                        method.methodName = desc.toString();
-                        clazz.classMethods.add(method);
+                    if (desc instanceof OWLClassImpl) {
+
+                        if (!desc.toString().equalsIgnoreCase("thing")) {
+                            clazz.classExtend = desc.toString();
+                        }
+
+                    } else if (desc instanceof OWLObjectSomeRestrictionImpl) {
+
+                        OWLObjectSomeRestrictionImpl restriction = (OWLObjectSomeRestrictionImpl) desc;
+                        System.out.println(restriction.getProperty());
+                        System.out.println(restriction.getFiller());
+
+                    } else if (desc instanceof OWLDataAllRestrictionImpl) {
+                        OWLDataAllRestrictionImpl restriction = (OWLDataAllRestrictionImpl) desc;
+                        clazz.addVariable(new Variable(restriction.getProperty().toString(), restriction.getFiller().toString()));
+
+                    } else {
+                        clazz.addMethod(new Method(desc.toString(), null, null));
+
                     }
                 }
 
-                SwarmExample.clazzez.add(clazz);
+                model.add(clazz);
                 clazz.toFile();
             }
 
