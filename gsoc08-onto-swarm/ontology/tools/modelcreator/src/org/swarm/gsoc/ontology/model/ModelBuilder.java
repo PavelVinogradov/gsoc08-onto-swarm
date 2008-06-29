@@ -21,63 +21,80 @@ import uk.ac.manchester.cs.owl.OWLDataAllRestrictionImpl;
 
 public class ModelBuilder {
 
-    public static List<Clazz> model = new LinkedList<Clazz>();
+    protected List<Clazz> model = new LinkedList<Clazz>();
+    protected OWLOntology ontology;
+    protected OWLOntologyManager manager;
+    protected URI physicalURI;
 
-    public static void main(String[] args) {
+    public ModelBuilder(String ontologyPath) {
+        // A simple example of how to load and save an ontology
+        // We first need to obtain a copy of an OWLOntologyManager, which, as the
+        // name suggests, manages a set of ontologies.  An ontology is unique within
+        // an ontology manager.  To load multiple copies of an ontology, multiple managers
+        // would have to be used.
+        manager = OWLManager.createOWLOntologyManager();
+
+        // We load an ontology from a physical URI - in this case we'll load the pizza
+        // ontology.
+        physicalURI = URI.create(ontologyPath);
+    }
+
+    protected void loadOntology() {
         try {
-            // A simple example of how to load and save an ontology
-            // We first need to obtain a copy of an OWLOntologyManager, which, as the
-            // name suggests, manages a set of ontologies.  An ontology is unique within
-            // an ontology manager.  To load multiple copies of an ontology, multiple managers
-            // would have to be used.
-            OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-
-            // We load an ontology from a physical URI - in this case we'll load the pizza
-            // ontology.
-            URI physicalURI = URI.create("file:/home/blaze/heatbug.owl");
-            //URI physicalURI = URI.create("file:/home/blaze/pizza.owl");
-
             // Now ask the manager to load the ontology
-            OWLOntology ontology = manager.loadOntologyFromPhysicalURI(physicalURI);
+            ontology = manager.loadOntologyFromPhysicalURI(physicalURI);
             // Print out all of the classes which are referenced in the ontology
-
-            for(OWLClass cls : ontology.getReferencedClasses()) {
-                Clazz clazz = new Clazz();
-                clazz.className = cls.toString();
-
-                Set<OWLDescription> superClasses = cls.getSuperClasses(ontology);                
-
-                for(OWLDescription desc : superClasses) {
-                    if (desc instanceof OWLClassImpl) {
-
-                        if (!desc.toString().equalsIgnoreCase("thing")) {
-                            clazz.classExtend = desc.toString();
-                        }
-
-                    } else if (desc instanceof OWLObjectSomeRestrictionImpl) {
-
-                        OWLObjectSomeRestrictionImpl restriction = (OWLObjectSomeRestrictionImpl) desc;
-                        System.out.println(restriction.getProperty());
-                        System.out.println(restriction.getFiller());
-
-                    } else if (desc instanceof OWLDataAllRestrictionImpl) {
-                        OWLDataAllRestrictionImpl restriction = (OWLDataAllRestrictionImpl) desc;
-                        clazz.addVariable(new Variable(restriction.getProperty().toString(), restriction.getFiller().toString()));
-
-                    } else {
-                        clazz.addMethod(new Method(desc.toString(), null, null));
-
-                    }
-                }
-
-                model.add(clazz);
-                clazz.toFile();
-            }
-
-            manager.removeOntology(ontology.getURI());
-        }
-        catch (OWLOntologyCreationException e) {
+        } catch (OWLOntologyCreationException e) {
             System.out.println("The ontology could not be created: " + e.getMessage());
         }
+
     }
+
+    public void generate() {
+        if (ontology == null) {
+            loadOntology();
+        }
+
+        for(OWLClass cls : ontology.getReferencedClasses()) {
+            Clazz clazz = new Clazz();
+            clazz.className = cls.toString();
+
+            Set<OWLDescription> superClasses = cls.getSuperClasses(ontology);
+
+            for(OWLDescription desc : superClasses) {
+
+                if (desc instanceof OWLClassImpl) {
+                    if (!desc.toString().equalsIgnoreCase("thing")) {
+                        clazz.classExtend = desc.toString();
+                    }
+
+                } else if (desc instanceof OWLObjectSomeRestrictionImpl) {
+                    OWLObjectSomeRestrictionImpl restriction = (OWLObjectSomeRestrictionImpl) desc;
+                    System.out.println(restriction.getProperty());
+                    System.out.println(restriction.getFiller());
+
+                } else if (desc instanceof OWLDataAllRestrictionImpl) {
+                    OWLDataAllRestrictionImpl restriction = (OWLDataAllRestrictionImpl) desc;
+                    clazz.addVariable(new Variable(restriction.getProperty().toString(), restriction.getFiller().toString()));
+
+                } else {
+                    clazz.addMethod(new Method(desc.toString(), null, null));
+                }
+            }
+
+            model.add(clazz);
+
+        }
+    }
+
+    public void write(String outPath) {
+        for (Clazz clazz: model) {
+            clazz.toFile(outPath);
+        }
+    }
+
+    public void clear() {
+        manager.removeOntology(ontology.getURI());
+    }
+
 }

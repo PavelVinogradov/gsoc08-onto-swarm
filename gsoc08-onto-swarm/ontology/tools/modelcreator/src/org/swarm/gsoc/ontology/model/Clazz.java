@@ -78,11 +78,11 @@ public class Clazz {
         return result;
     }
 
-    public boolean toFile () {
+    public boolean toFile (String outPath) {
 
         try{
             // Create file
-            FileWriter fstream = new FileWriter("out/generated/" + className + ".class");
+            FileWriter fstream = new FileWriter(outPath + className + ".class");
             BufferedWriter out = new BufferedWriter(fstream);
             out.write(this.toString());
             //Close the output stream
