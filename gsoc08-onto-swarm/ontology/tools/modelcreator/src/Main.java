@@ -1,11 +1,10 @@
 import org.swarm.gsoc.ontology.model.ModelBuilder;
 
 /**
- * Created by IntelliJ IDEA.
- * User: blaze
+ * Created at NixDev.net.
+ * Author: Pavel Vinogradov <pavel.vinogradov _at_ nixdev.net>
  * Date: 29.06.2008
  * Time: 17:24:35
- * To change this template use File | Settings | File Templates.
  */
 public class Main {    
 

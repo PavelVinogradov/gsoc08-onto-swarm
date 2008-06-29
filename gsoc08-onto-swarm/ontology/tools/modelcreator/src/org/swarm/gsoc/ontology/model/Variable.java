@@ -14,7 +14,7 @@ public class Variable {
         Integer index = name.indexOf('_');
 
         if (index > 0) {
-            name = name.substring(index+1, index+2).toUpperCase() + name.substring(index+2, name.length());
+            name = name.substring(index+1, index+2).toLowerCase() + name.substring(index+2, name.length());
         }
 
         this.variableName = name;
@@ -30,4 +30,23 @@ public class Variable {
         return result;
     }
 
+    public String getVariableName() {
+        return variableName;
+    }
+
+    public String getMethodVariableName() {
+        return variableName.substring(0, 1).toUpperCase() + variableName.substring(1, variableName.length());
+    }
+
+    public void setVariableName(String variableName) {
+        this.variableName = variableName;
+    }
+
+    public String getVariableType() {
+        return variableType;
+    }
+
+    public void setVariableType(String variableType) {
+        this.variableType = variableType;
+    }
 }

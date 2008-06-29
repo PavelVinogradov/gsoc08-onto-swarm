@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 
 /**
- * Created by NixDev.net.
+ * Created at NixDev.net.
  * Author: Pavel Vinogradov <pavel.vinogradov _at_ nixdev.net>
  * Date: 22.06.2008
  * Time: 2:04:07
