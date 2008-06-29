@@ -9,6 +9,7 @@ package org.swarm.gsoc.ontology.model;
 public class Variable {
     protected String variableName;
     protected String variableType;
+    protected Object defaultValue;
 
     public Variable (String name, String type) {
         Integer index = name.indexOf('_');
@@ -19,15 +20,6 @@ public class Variable {
 
         this.variableName = name;
         this.variableType = type;
-    }
-    
-    @Override
-    public String toString() {
-        String result;
-
-        result = "\tprivate " + variableType + " " + variableName + ";\n";
-
-        return result;
     }
 
     public String getVariableName() {
@@ -48,5 +40,28 @@ public class Variable {
 
     public void setVariableType(String variableType) {
         this.variableType = variableType;
+    }
+
+    public Object getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(Object defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    @Override
+    public String toString() {
+        String result;
+
+        result = "\tprivate " + variableType + " " + variableName;
+
+        if (getDefaultValue() != null) {
+            result += " " + getDefaultValue();
+        }
+
+        result += ";\n";
+
+        return result;
     }
 }

@@ -19,6 +19,47 @@ public class Clazz {
     public List<Method> classMethods = new ArrayList<Method>();
     public List<Variable> classVariables = new ArrayList<Variable>();
 
+    public boolean addMethod(Method method) {
+        if (classMethods.contains(method)) {
+            return false;
+        } else {
+            return classMethods.add(method);
+        }
+    }
+
+    public boolean addConstant(Variable variable, Object value) {
+        Boolean result;
+
+        if (classVariables.contains(variable)) {
+            result = false;
+        } else {
+            Constant constant = new Constant(variable.getVariableName(), variable.getVariableType(), value);
+            result = classVariables.add(constant);
+        }
+
+        return result;
+    }
+
+    public boolean addVariable(Variable variable) {
+        Boolean result;
+
+        if (classVariables.contains(variable)) {
+            result = false;
+        } else {
+            result = classVariables.add(variable);
+            Method getter = new Method("get"+variable.getMethodVariableName(),
+                    "return " + variable.getVariableName() + ";", variable.getVariableType());
+            Method setter = new Method("set"+variable.getMethodVariableName(),
+                    "this." + variable.getVariableName() + " = " + variable.getVariableName() + ";", null);
+            setter.methodArg.add(variable);
+            
+            addMethod(getter);
+            addMethod(setter);
+        }
+
+        return result;
+    }
+
     @Override
     public String toString () {
         String result;
@@ -47,34 +88,6 @@ public class Clazz {
         }
 
         result += "}\n";
-
-        return result;
-    }
-
-    public boolean addMethod(Method method) {
-        if (classMethods.contains(method)) {
-            return false;
-        } else {
-            return classMethods.add(method);
-        }
-    }
-
-    public boolean addVariable(Variable variable) {
-        Boolean result = true;
-
-        if (classVariables.contains(variable)) {
-            result = false;
-        } else {
-            result = classVariables.add(variable);
-            Method getter = new Method("get"+variable.getMethodVariableName(),
-                    "return " + variable.getVariableName() + ";", variable.getVariableType());
-            Method setter = new Method("set"+variable.getMethodVariableName(),
-                    "this." + variable.getVariableName() + " = " + variable.getVariableName() + ";", null);
-            setter.methodArg.add(variable);
-            
-            addMethod(getter);
-            addMethod(setter);
-        }
 
         return result;
     }
