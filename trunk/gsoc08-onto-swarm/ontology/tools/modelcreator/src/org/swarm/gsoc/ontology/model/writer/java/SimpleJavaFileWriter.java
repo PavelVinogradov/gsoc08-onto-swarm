@@ -8,11 +8,10 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 
 /**
- * Created by IntelliJ IDEA.
- * User: blaze
+ * Created at NixDev.net.
+ * Author: Pavel Vinogradov <pavel.vinogradov _at_ nixdev.net>
  * Date: 29.06.2008
  * Time: 18:17:42
- * To change this template use File | Settings | File Templates.
  */
 public class SimpleJavaFileWriter implements ModelWriter {
 

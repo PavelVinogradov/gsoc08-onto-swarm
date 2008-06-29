@@ -77,7 +77,7 @@ public class ModelBuilder {
                 } else if (desc instanceof OWLObjectSomeRestrictionImpl) {
                     System.out.print("\trestriction " + desc + " [unhandled]");
 
-                    OWLObjectSomeRestrictionImpl restriction = (OWLObjectSomeRestrictionImpl) desc;
+                    //OWLObjectSomeRestrictionImpl restriction = (OWLObjectSomeRestrictionImpl) desc;
                     //System.out.println(restriction.getProperty());
                     //System.out.println(restriction.getFiller());
 
@@ -95,8 +95,16 @@ public class ModelBuilder {
                     OWLObjectPropertyExpression res = restriction.getProperty();
                     Set<OWLDescription> domain = res.getDomains(ontology);
 
-                    clazz.addVariable(new Variable(restriction.getProperty().toString(), domain.toString()));
+                    //TODO: Implement support for big domain
+                    if (domain.size() == 1) {
+                        for (OWLDescription value: domain) {
+                            clazz.addVariable(new Variable(restriction.getProperty().toString(), value.toString()));
+                        }
+                    } else {
+                        System.out.print("domain too big " + domain.toString() + "[unhandled]");
+                    }
                 } else {
+                    //TODO: Implement support for other elements
                     System.out.print("\tunknown " + desc + "[unhandled]");
                     
                     clazz.addMethod(new Method(desc.toString(), null, null));
