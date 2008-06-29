@@ -61,7 +61,7 @@ public class Variable {
         result = "\tprivate " + variableType + " " + variableName;
 
         if (getDefaultValue() != null) {
-            result += " " + getDefaultValue();
+            result += " = " + getDefaultValue();
         }
 
         result += ";\n";
