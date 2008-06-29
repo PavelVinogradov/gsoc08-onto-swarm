@@ -27,14 +27,13 @@ public class Clazz {
         }
     }
 
-    public boolean addConstant(Variable variable, Object value) {
+    public boolean addConstant(Constant variable) {
         Boolean result;
 
         if (classVariables.contains(variable)) {
             result = false;
         } else {
-            Constant constant = new Constant(variable.getVariableName(), variable.getVariableType(), value);
-            result = classVariables.add(constant);
+            result = classVariables.add(variable);
         }
 
         return result;

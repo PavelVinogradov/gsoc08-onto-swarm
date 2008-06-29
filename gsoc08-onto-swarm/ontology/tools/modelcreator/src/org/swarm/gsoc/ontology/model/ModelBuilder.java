@@ -103,6 +103,21 @@ public class ModelBuilder {
                     } else {
                         System.out.print("domain too big " + domain.toString() + "[unhandled]");
                     }
+                } else if (desc instanceof OWLDataValueRestrictionImpl) {
+                    System.out.print("\tdata value " + desc);
+
+                    OWLDataValueRestrictionImpl restriction = (OWLDataValueRestrictionImpl) desc;
+
+                    if (restriction.getValue() instanceof OWLTypedConstantImpl) {
+                        OWLTypedConstantImpl res = (OWLTypedConstantImpl)restriction.getValue();
+
+                        Constant var = new Constant(restriction.getProperty().toString(), res.getDataType().toString(), res.getLiteral());
+                        clazz.addConstant(var);
+                    } else {
+                        System.err.println (restriction.getValue().getClass());
+                        //var.setDefaultValue(restriction.getValue().getLiteral());
+                        //clazz.addVariable(var);
+                    }
                 } else {
                     //TODO: Implement support for other elements
                     System.out.print("\tunknown " + desc + "[unhandled]");

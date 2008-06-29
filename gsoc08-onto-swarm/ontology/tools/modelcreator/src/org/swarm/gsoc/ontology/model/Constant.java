@@ -14,11 +14,25 @@ public class Constant extends Variable {
         setDefaultValue(value);
     }
 
+    public void setVariableName(String variableName) {
+        String tmpName = variableName;
+
+        Integer index = tmpName.indexOf('_');
+
+
+        if (index > 0) {
+            tmpName = tmpName.substring(index+1, tmpName.length());
+        }
+
+        
+        this.variableName = tmpName;
+    }
+
     @Override
     public String toString() {
         String result;
 
-        result = "\tpublic static final " + variableType + " " + variableName + " " + getDefaultValue() + ";\n";
+        result = "\tpublic static final " + variableType + " " + variableName + " = " + getDefaultValue() + ";\n";
 
         return result;
     }

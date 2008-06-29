@@ -12,14 +12,9 @@ public class Variable {
     protected Object defaultValue;
 
     public Variable (String name, String type) {
-        Integer index = name.indexOf('_');
 
-        if (index > 0) {
-            name = name.substring(index+1, index+2).toLowerCase() + name.substring(index+2, name.length());
-        }
-
-        this.variableName = name;
-        this.variableType = type;
+        setVariableName(name);
+        setVariableType(type);
     }
 
     public String getVariableName() {
@@ -31,7 +26,16 @@ public class Variable {
     }
 
     public void setVariableName(String variableName) {
-        this.variableName = variableName;
+        String tmpName = variableName;
+
+        Integer index = tmpName.indexOf('_');
+
+
+        if (index > 0) {
+            tmpName = tmpName.substring(index+1, index+2).toLowerCase() + tmpName.substring(index+2, tmpName.length());
+        }
+
+        this.variableName = tmpName;
     }
 
     public String getVariableType() {
