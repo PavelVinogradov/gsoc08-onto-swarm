@@ -111,8 +111,11 @@ public class ModelBuilder {
                     if (restriction.getValue() instanceof OWLTypedConstantImpl) {
                         OWLTypedConstantImpl res = (OWLTypedConstantImpl)restriction.getValue();
 
-                        Constant var = new Constant(restriction.getProperty().toString(), res.getDataType().toString(), res.getLiteral());
-                        clazz.addConstant(var);
+                        //Constant var = new Constant(restriction.getProperty().toString(), res.getDataType().toString(), res.getLiteral());
+                        //clazz.addConstant(var);
+                        Variable variable = new Variable(restriction.getProperty().toString(), res.getDataType().toString());
+                        variable.setDefaultValue(res.getLiteral());
+                        clazz.addVariable(variable);
                     } else {
                         System.err.println (restriction.getValue().getClass());
                         //var.setDefaultValue(restriction.getValue().getLiteral());
