@@ -41,6 +41,15 @@
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="heatbug_model"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:ID="heatbug_outputHeat"/>
         </owl:onProperty>
@@ -98,8 +107,25 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="heatbug_heatSpace"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="Grid2d"/>
+  <owl:ObjectProperty rdf:about="#heatbug_heatSpace">
+    <rdfs:range rdf:resource="#HeatSpace"/>
+    <rdfs:domain rdf:resource="#HeatSpace"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#heatbug_model">
+    <rdfs:domain rdf:resource="#HeatbugModelSwarm"/>
+    <rdfs:range rdf:resource="#HeatbugModelSwarm"/>
+  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#heatbug_world">
     <rdfs:domain rdf:resource="#Grid2d"/>
     <rdfs:range rdf:resource="#Grid2d"/>
