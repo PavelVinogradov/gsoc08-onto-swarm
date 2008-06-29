@@ -2,15 +2,15 @@ package org.swarm.gsoc.ontology.model;
 
 import org.semanticweb.owl.model.*;
 import org.semanticweb.owl.apibinding.OWLManager;
+import org.swarm.gsoc.ontology.model.writer.ModelWriter;
+import org.swarm.gsoc.ontology.model.writer.java.SimpleJavaFileWriter;
 
 import java.net.URI;
 import java.util.Set;
 import java.util.List;
 import java.util.LinkedList;
 
-import uk.ac.manchester.cs.owl.OWLClassImpl;
-import uk.ac.manchester.cs.owl.OWLObjectSomeRestrictionImpl;
-import uk.ac.manchester.cs.owl.OWLDataAllRestrictionImpl;
+import uk.ac.manchester.cs.owl.*;
 
 /**
  * Created by NixDev.net.
@@ -56,6 +56,9 @@ public class ModelBuilder {
         }
 
         for(OWLClass cls : ontology.getReferencedClasses()) {
+
+            System.out.println(cls.toString() + " : ");
+
             Clazz clazz = new Clazz();
             clazz.className = cls.toString();
 
@@ -64,33 +67,50 @@ public class ModelBuilder {
             for(OWLDescription desc : superClasses) {
 
                 if (desc instanceof OWLClassImpl) {
+
+                    System.out.print("\tclass " + desc);
+
                     if (!desc.toString().equalsIgnoreCase("thing")) {
                         clazz.classExtend = desc.toString();
                     }
 
                 } else if (desc instanceof OWLObjectSomeRestrictionImpl) {
+                    System.out.print("\trestriction " + desc + " [unhandled]");
+
                     OWLObjectSomeRestrictionImpl restriction = (OWLObjectSomeRestrictionImpl) desc;
-                    System.out.println(restriction.getProperty());
-                    System.out.println(restriction.getFiller());
+                    //System.out.println(restriction.getProperty());
+                    //System.out.println(restriction.getFiller());
 
                 } else if (desc instanceof OWLDataAllRestrictionImpl) {
+                    System.out.print("\tattribute " + desc);
+
                     OWLDataAllRestrictionImpl restriction = (OWLDataAllRestrictionImpl) desc;
                     clazz.addVariable(new Variable(restriction.getProperty().toString(), restriction.getFiller().toString()));
 
+                } else if (desc instanceof OWLObjectExactCardinalityRestriction) {
+                    System.out.print("\tobject restriction " + desc);
+
+                    OWLObjectExactCardinalityRestrictionImpl restriction = (OWLObjectExactCardinalityRestrictionImpl) desc;
+
+                    OWLObjectPropertyExpression res = restriction.getProperty();
+                    Set<OWLDescription> domain = res.getDomains(ontology);
+
+                    clazz.addVariable(new Variable(restriction.getProperty().toString(), domain.toString()));
                 } else {
+                    System.out.print("\tunknown " + desc + "[unhandled]");
+                    
                     clazz.addMethod(new Method(desc.toString(), null, null));
                 }
+                System.out.println();
             }
 
             model.add(clazz);
-
         }
     }
 
     public void write(String outPath) {
-        for (Clazz clazz: model) {
-            clazz.toFile(outPath);
-        }
+        ModelWriter writer = new SimpleJavaFileWriter(outPath);
+        writer.generate(model);
     }
 
     public void clear() {

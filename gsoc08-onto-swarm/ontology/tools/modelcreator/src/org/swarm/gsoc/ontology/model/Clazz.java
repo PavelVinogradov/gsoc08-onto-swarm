@@ -26,13 +26,14 @@ public class Clazz {
         result = "public class " + className;
         if (classInterfaces.size() > 0) {
             result += " imlement ";
-        }
-        for (String classInterface: classInterfaces) {
-            result += " " + classInterface;
+
+            for (String classInterface: classInterfaces) {
+                result += " " + classInterface;
+            }
         }
 
         if (classExtend != null) {
-            result += " extends " + classExtend + "\n";
+            result += " extends " + classExtend + " ";
         }
 
         result += "{ \n";
@@ -65,10 +66,10 @@ public class Clazz {
             result = false;
         } else {
             result = classVariables.add(variable);
-            Method getter = new Method("get"+variable.variableName,
-                    "return " + variable.variableName + ";", variable.variableType);
-            Method setter = new Method("set"+variable.variableName,
-                    "this." + variable.variableName + " = " + variable.variableName + ";", null);
+            Method getter = new Method("get"+variable.getMethodVariableName(),
+                    "return " + variable.getVariableName() + ";", variable.getVariableType());
+            Method setter = new Method("set"+variable.getMethodVariableName(),
+                    "this." + variable.getVariableName() + " = " + variable.getVariableName() + ";", null);
             setter.methodArg.add(variable);
             
             addMethod(getter);
@@ -76,21 +77,5 @@ public class Clazz {
         }
 
         return result;
-    }
-
-    public boolean toFile (String outPath) {
-
-        try{
-            // Create file
-            FileWriter fstream = new FileWriter(outPath + className + ".class");
-            BufferedWriter out = new BufferedWriter(fstream);
-            out.write(this.toString());
-            //Close the output stream
-            out.close();
-         } catch (Exception e){//Catch exception if any
-            System.err.println("Error: " + e.getMessage());
-            return false;
-        }
-        return true;        
     }
 }
