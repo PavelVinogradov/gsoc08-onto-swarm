@@ -55,6 +55,7 @@ public class ModelBuilder {
             loadOntology();
         }
 
+        // Traveling through all ontology and generate data model
         for(OWLClass cls : ontology.getReferencedClasses()) {
 
             System.out.println(cls.toString() + " : ");
@@ -64,8 +65,10 @@ public class ModelBuilder {
 
             Set<OWLDescription> superClasses = cls.getSuperClasses(ontology);
 
+            // Traveling through all superclass of each class
             for(OWLDescription desc : superClasses) {
 
+                // This is class definition
                 if (desc instanceof OWLClassImpl) {
 
                     System.out.print("\tclass " + desc);
@@ -74,6 +77,7 @@ public class ModelBuilder {
                         clazz.classExtend = desc.toString();
                     }
 
+                // This is unhandled restriction
                 } else if (desc instanceof OWLObjectSomeRestrictionImpl) {
                     System.out.print("\trestriction " + desc + " [unhandled]");
 
@@ -81,12 +85,14 @@ public class ModelBuilder {
                     //System.out.println(restriction.getProperty());
                     //System.out.println(restriction.getFiller());
 
+                // This is class attribute without default value
                 } else if (desc instanceof OWLDataAllRestrictionImpl) {
                     System.out.print("\tattribute " + desc);
 
                     OWLDataAllRestrictionImpl restriction = (OWLDataAllRestrictionImpl) desc;
                     clazz.addVariable(new Variable(restriction.getProperty().toString(), restriction.getFiller().toString()));
 
+                // This is class attribute with object type
                 } else if (desc instanceof OWLObjectExactCardinalityRestriction) {
                     System.out.print("\tobject restriction " + desc);
 
@@ -103,24 +109,40 @@ public class ModelBuilder {
                     } else {
                         System.out.print("domain too big " + domain.toString() + "[unhandled]");
                     }
+                // This is attribute with default value
                 } else if (desc instanceof OWLDataValueRestrictionImpl) {
                     System.out.print("\tdata value " + desc);
 
                     OWLDataValueRestrictionImpl restriction = (OWLDataValueRestrictionImpl) desc;
 
                     if (restriction.getValue() instanceof OWLTypedConstantImpl) {
+                        Boolean isVariable = true;
                         OWLTypedConstantImpl res = (OWLTypedConstantImpl)restriction.getValue();
+                        OWLDataProperty prop = restriction.getProperty().asOWLDataProperty();
 
-                        //Constant var = new Constant(restriction.getProperty().toString(), res.getDataType().toString(), res.getLiteral());
-                        //clazz.addConstant(var);
-                        Variable variable = new Variable(restriction.getProperty().toString(), res.getDataType().toString());
-                        variable.setDefaultValue(res.getLiteral());
-                        clazz.addVariable(variable);
+                        for (OWLDataPropertyRangeAxiom a : ontology.getDataPropertyRangeAxiom(prop) ) {
+                            OWLDataRange range = a.getRange();
+                            if (range instanceof OWLDataOneOfImpl)
+                                isVariable = false;
+                        }
+
+                        if (isVariable) {
+                            System.out.print(" variable ");
+                            Variable variable = new Variable(restriction.getProperty().toString(), res.getDataType().toString());
+                            variable.setDefaultValue(res.getLiteral());
+                            clazz.addVariable(variable);
+                        } else {
+                            System.out.print(" constant ");
+                            Constant var = new Constant(restriction.getProperty().toString(), res.getDataType().toString(), res.getLiteral());
+                            clazz.addConstant(var);
+                        }
+
                     } else {
                         System.err.println (restriction.getValue().getClass());
                         //var.setDefaultValue(restriction.getValue().getLiteral());
                         //clazz.addVariable(var);
                     }
+                //I don't know what this!
                 } else {
                     //TODO: Implement support for other elements
                     System.out.print("\tunknown " + desc + "[unhandled]");
