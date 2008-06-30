@@ -143,6 +143,9 @@ public class ModelBuilder {
                         //clazz.addVariable(var);
                     }
                 //I don't know what this!
+                } else if (desc instanceof OWLObjectAllRestrictionImpl) {
+                    //TODO: Implement collection support
+                    System.out.print("\tWTF " + desc);
                 } else {
                     //TODO: Implement support for other elements
                     System.out.print("\tunknown " + desc + "[unhandled]");
