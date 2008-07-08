@@ -32,7 +32,7 @@ public class SimpleJavaFileWriter implements ModelWriter {
 
         try{
             // Create file
-            FileWriter fstream = new FileWriter(path + clazz.className + ".class");
+            FileWriter fstream = new FileWriter(path + clazz.className + ".java");
             BufferedWriter out = new BufferedWriter(fstream);
             out.write(clazz.toString());
             //Close the output stream

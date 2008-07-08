@@ -62,6 +62,10 @@ public class Variable {
 
         if (getDefaultValue() != null) {
             result += " = " + getDefaultValue();
+
+            //Workaround for float values
+            if (variableType.equals("float"))
+                result += "f";    
         }
 
         result += ";\n";

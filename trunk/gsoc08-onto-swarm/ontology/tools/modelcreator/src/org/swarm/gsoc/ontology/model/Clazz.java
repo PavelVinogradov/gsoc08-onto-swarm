@@ -2,6 +2,8 @@ package org.swarm.gsoc.ontology.model;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
@@ -18,6 +20,7 @@ public class Clazz {
     public String classExtend;
     public List<Method> classMethods = new ArrayList<Method>();
     public List<Variable> classVariables = new ArrayList<Variable>();
+    public List<Collection> classCollections = new ArrayList<Collection>();    
 
     public boolean addMethod(Method method) {
         if (classMethods.contains(method)) {
@@ -59,11 +62,27 @@ public class Clazz {
         return result;
     }
 
+    public boolean addCollection(Collection collection) {
+        Boolean result = true;
+
+        if (classCollections.contains(collection)) {
+            result = false;
+        } else {
+            result = classCollections.add(collection);
+        }
+
+        return result;
+    }
+    
     @Override
     public String toString () {
-        String result;
+        String result = "";
 
-        result = "public class " + className;
+        if (classCollections.size() > 0) {
+            result += "import java.util.*;\n\n";
+        }
+
+        result += "public class " + className;
         if (classInterfaces.size() > 0) {
             result += " imlement ";
 
@@ -77,6 +96,10 @@ public class Clazz {
         }
 
         result += "{ \n";
+
+        for (Collection collection: classCollections) {
+            result += collection.toString() + "\n";
+        }
 
         for (Variable var: classVariables) {
             result += var.toString() + "\n";
