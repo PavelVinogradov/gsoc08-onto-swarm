@@ -79,7 +79,9 @@ public class ModelBuilder {
 
                 // This is unhandled restriction
                 } else if (desc instanceof OWLObjectSomeRestrictionImpl) {
+                    OWLObjectSomeRestrictionImpl restriction = (OWLObjectSomeRestrictionImpl) desc;
                     System.out.print("\trestriction " + desc + " [unhandled]");
+                    //clazz.addVariable(new Variable(restriction.getProperty().toString(), restriction.getFiller().toString()));
 
                     //OWLObjectSomeRestrictionImpl restriction = (OWLObjectSomeRestrictionImpl) desc;
                     //System.out.println(restriction.getProperty());
@@ -142,15 +144,19 @@ public class ModelBuilder {
                         //var.setDefaultValue(restriction.getValue().getLiteral());
                         //clazz.addVariable(var);
                     }
-                //I don't know what this!
+                //Collection
                 } else if (desc instanceof OWLObjectAllRestrictionImpl) {
+                    System.out.print("\tcollection " + desc);
+                    
                     //TODO: Implement collection support
-                    System.out.print("\tWTF " + desc);
+                    OWLObjectAllRestrictionImpl restriction = (OWLObjectAllRestrictionImpl) desc;                    
+                    clazz.addCollection(new Collection(restriction.getProperty().toString(), Collection.TYPE.LIST, restriction.getFiller().toString()));
                 } else {
+                    //I don't know what it
                     //TODO: Implement support for other elements
                     System.out.print("\tunknown " + desc + "[unhandled]");
                     
-                    clazz.addMethod(new Method(desc.toString(), null, null));
+                    //clazz.addMethod(new Method(desc.toString(), null, null));
                 }
                 System.out.println();
             }

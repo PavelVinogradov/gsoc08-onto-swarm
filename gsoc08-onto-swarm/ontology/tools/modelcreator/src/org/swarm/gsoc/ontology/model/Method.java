@@ -36,7 +36,9 @@ public class Method {
         for (Variable var: methodArg) {
             result += var.variableType + " " + var.variableName + ",";
         }
-        result = result.substring(0, result.length()-1);
+        
+        if (methodArg.size() > 0)
+            result = result.substring(0, result.length()-1);
 
         result += ") {";
 
