@@ -279,6 +279,7 @@
     <library name="OWl">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/owlapi-bin.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/ant.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>

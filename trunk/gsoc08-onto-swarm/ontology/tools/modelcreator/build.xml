@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<project default="build">
+
+    <taskdef name="builder" classname="org.swarm.gsoc.ontology.model.ant.BuildModelTask"/>
+
+    <target name="compile">
+        <javac>
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+            
+        </javac>
+    </target>
+
+    <target name="build">
+        <builder
+                owlPath="/home/blaze/devel/IdeaProjects/OwlModelBuilder/examples/heatbug.owl"
+                outPath="out/generated/"
+            />
+    </target>
+</project>
