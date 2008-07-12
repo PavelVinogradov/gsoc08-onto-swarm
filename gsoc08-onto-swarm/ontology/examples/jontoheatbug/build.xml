@@ -27,6 +27,17 @@
 		</jar>
 	</target>
 
+    <path id="dependency">
+        <pathelement location="lib/model-builder.jar"/>
+    </path>
+    
+    <taskdef name="builder" classname="org.swarm.gsoc.ontology.model.ant.BuildModelTask">
+        <classpath refid="dependency"/>
+    </taskdef>
+
+	<target name="generate">
+	</target>
+	
 	<target name="run">		
 		<java jar="${project.jar}" fork="true" failonerror="true" maxmemory="128m">					
 			<jvmarg value="-Djava.library.path=${swarm.native.path}" />
