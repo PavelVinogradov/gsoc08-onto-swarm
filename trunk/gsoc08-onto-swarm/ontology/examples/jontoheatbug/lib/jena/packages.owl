@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.owl-ontologies.com/Ontology1213553419.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.owl-ontologies.com/Ontology1213553419.owl">
+  <owl:Ontology rdf:about=""/>
+  <owl:Class rdf:ID="Low">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="VulnerabilitySerious"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Debian">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Distribution"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="AltLinux"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Mandriva"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="RedHat"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="Fixed">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="VulnerabilityStatus"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="New"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Pending"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Confirmaed"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="Critical">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#VulnerabilitySerious"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#VulnerabilityStatus">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Vulnerability"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Pending">
+    <rdfs:subClassOf rdf:resource="#VulnerabilityStatus"/>
+    <owl:disjointWith rdf:resource="#Fixed"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#New"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Confirmaed"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="#VulnerabilitySerious">
+    <rdfs:subClassOf rdf:resource="#Vulnerability"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Software"/>
+  <owl:Class rdf:about="#Mandriva">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AltLinux"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#RedHat"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Debian"/>
+    <rdfs:subClassOf rdf:resource="#Distribution"/>
+  </owl:Class>
+  <owl:Class rdf:ID="High">
+    <rdfs:subClassOf rdf:resource="#VulnerabilitySerious"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Normal">
+    <rdfs:subClassOf rdf:resource="#VulnerabilitySerious"/>
+  </owl:Class>
+  <owl:Class rdf:about="#RedHat">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AltLinux"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Mandriva"/>
+    <owl:disjointWith rdf:resource="#Debian"/>
+    <rdfs:subClassOf rdf:resource="#Distribution"/>
+  </owl:Class>
+  <owl:Class rdf:about="#New">
+    <rdfs:subClassOf rdf:resource="#VulnerabilityStatus"/>
+    <owl:disjointWith rdf:resource="#Fixed"/>
+    <owl:disjointWith rdf:resource="#Pending"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Confirmaed"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="#Confirmaed">
+    <owl:disjointWith rdf:resource="#Fixed"/>
+    <owl:disjointWith rdf:resource="#New"/>
+    <owl:disjointWith rdf:resource="#Pending"/>
+    <rdfs:subClassOf rdf:resource="#VulnerabilityStatus"/>
+  </owl:Class>
+  <owl:Class rdf:about="#AltLinux">
+    <rdfs:subClassOf rdf:resource="#Distribution"/>
+    <owl:disjointWith rdf:resource="#Mandriva"/>
+    <owl:disjointWith rdf:resource="#RedHat"/>
+    <owl:disjointWith rdf:resource="#Debian"/>
+  </owl:Class>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.3.1, Build 430)  http://protege.stanford.edu -->
