@@ -38,9 +38,6 @@
 		<mkdir dir="build"/>
 		<mkdir dir="build/model"/>
 		<mkdir dir="build/model/${model.name}"/>
-		
-		<mkdir dir="src/model"/>
-		<mkdir dir="src/model/${model.name}"/>
 	</target>
 	
 	<target name="_compile" depends="_clean, _init">				
@@ -48,11 +45,11 @@
 	</target>
 
 	<target name="_modelbuild">
-		<builder owlPath="${model.name}.owl" outPath="${model.build.path}/${model.name}/"/>
+		<builder owlPath="${model.name}.owl" outPath="${model.compile.path}/${model.name}/"/>
 	</target>
 	
 	<target name="_modelcompile">
-		<javac srcdir="${model.build.path}" destdir="${model.compile.path}/${model.name}/"/>
+		<javac srcdir="${model.compile.path}/${model.name}/" destdir="${model.compile.path}/${model.name}/"/>
 	</target>
 	
 	<target name="_modeljar">
