@@ -3,21 +3,13 @@
 
 	<property file="build.properties" />
 	
-	<target name="build_and_run" depends="compile, build, run" description="Build and run project">
+	<taskdef name="builder" classname="org.swarm.gsoc.ontology.model.ant.BuildModelTask" classpath="lib/model-builder.jar;lib/owlapi-bin.jar"/>
+	
+	<target name="build_and_run" depends="build, run" description="Build and run project">
 		<echo>"Build ${project.name}"</echo>
 	</target>
 
-	<target name="clear">
-		<delete dir="build" />
-		<delete file="${project.jar}" />
-	</target>
-
-	<target name="compile" depends="clear">
-		<mkdir dir="build" />		
-		<javac srcdir="src" destdir="build" classpath="${swarm.lib.path}/${swarm.lib.jar}" />
-	</target>
-
-	<target name="build">
+	<target name="build" depends="_compile">
 		<jar jarfile="${project.jar}" basedir="build" includes="**/*.class">
 			<manifest>
 				<attribute name="Build-By" value="${project.developer}" />
@@ -25,16 +17,9 @@
 				<attribute name="Class-Path" value="${swarm.lib.path}/${swarm.lib.jar}"/>
 			</manifest>
 		</jar>
-	</target>
+	</target>    
 
-    <path id="dependency">
-        <pathelement location="lib/model-builder.jar"/>
-    </path>
-    
-    <taskdef name="builder" classname="org.swarm.gsoc.ontology.model.ant.BuildModelTask" classpath="lib/model-builder.jar"/>
-
-	<target name="generate">
-		<builder owlPath="heatbug.owl" modelPath="build"/>
+	<target name="model" depends="_init, _modelbuild, _modelcompile, _modeljar">
 	</target>
 	
 	<target name="run">		
@@ -43,4 +28,34 @@
 		</java>
 	</target>
 
+	<!-- Internal tasks and targets -->
+	<target name="_clean">
+		<delete dir="build" />
+		<delete file="${project.jar}" />
+	</target>
+
+	<target name="_init">
+		<mkdir dir="build"/>
+		<mkdir dir="build/model"/>
+		<mkdir dir="build/model/${model.name}"/>
+		
+		<mkdir dir="src/model"/>
+		<mkdir dir="src/model/${model.name}"/>
+	</target>
+	
+	<target name="_compile" depends="_clean, _init">				
+		<javac srcdir="src" destdir="build" classpath="${swarm.lib.path}/${swarm.lib.jar}" />
+	</target>
+
+	<target name="_modelbuild">
+		<builder owlPath="${model.name}.owl" outPath="${model.build.path}/${model.name}/"/>
+	</target>
+	
+	<target name="_modelcompile">
+		<javac srcdir="${model.build.path}" destdir="${model.compile.path}/${model.name}/"/>
+	</target>
+	
+	<target name="_modeljar">
+		<jar jarfile="${model.name}-model.jar" basedir="${model.compile.path}/${model.name}/" includes="**/*.class"/>
+	</target>	
 </project>
