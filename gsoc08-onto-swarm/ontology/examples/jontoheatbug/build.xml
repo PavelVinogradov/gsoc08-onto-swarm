@@ -31,11 +31,10 @@
         <pathelement location="lib/model-builder.jar"/>
     </path>
     
-    <taskdef name="builder" classname="org.swarm.gsoc.ontology.model.ant.BuildModelTask">
-        <classpath refid="dependency"/>
-    </taskdef>
+    <taskdef name="builder" classname="org.swarm.gsoc.ontology.model.ant.BuildModelTask" classpath="lib/model-builder.jar"/>
 
 	<target name="generate">
+		<builder owlPath="heatbug.owl" modelPath="build"/>
 	</target>
 	
 	<target name="run">		
