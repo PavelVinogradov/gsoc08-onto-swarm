@@ -90,70 +90,83 @@ behavior:
  </dir>
 
 */
-public class Heatbug
-{
-// The amount of heat I produce (units are undefined):
-public int outputHeat;
-    public Object setOutputHeat (int outputHeat)
-    { this.outputHeat = outputHeat; return this; }
-// The temperature I prefer:
-public int idealTemperature;
-    public int getIdealTemperature () { return idealTemperature; }
-    public Object setIdealTemperature (int idealTemperature)
-    { this.idealTemperature = idealTemperature; return this; }
-// The difference between my temperature and my ideal temperature:
-public double unhappiness;
-    public double getUnhappiness () { return unhappiness; }
-   // The chance that I will move arbitrarily:
-public double randomMoveProbability;
-    public void setRandomMoveProbability (double randomMoveProbability)
-    { this.randomMoveProbability = randomMoveProbability; }
-// My location in _world as well as in _heatSpace:
-public int x, y;
-// My index into the ColorMap defined in HeatbugModelSwarm:
-public byte colorIndex;
-    public void setColorIndex (byte colorIndex)
-    { this.colorIndex = colorIndex; }
-// The 2-dimensional world of motion:
-private Grid2d _world;
-// The 2-dimensional world of heat:
-private HeatSpace _heatSpace;
-// The model I belong to:
-private HeatbugModelSwarm _model;
-// My index in the Heatbug list (needed only for diagnostics):
-private int _heatbugIndex;
-// The level of diagnostics to write to standard output:
-private int _printDiagnostics = 0;
-    public void setPrintDiagnostics (int printDiagostics)
-    { _printDiagnostics = printDiagostics; }
+public class Heatbug {
+	// The amount of heat I produce (units are undefined):
+	public int outputHeat;
+    public Object setOutputHeat (int outputHeat) { 
+    	this.outputHeat = outputHeat; 
+    	return this; 
+    }
+    
+    // The temperature I prefer:
+    public int idealTemperature;
+    public int getIdealTemperature () { 
+    	return idealTemperature; 
+    }
+    public Object setIdealTemperature (int idealTemperature) { 
+    	this.idealTemperature = idealTemperature; 
+    	return this; 
+    }
 
-public Heatbug 
- (Grid2d world, 
-  HeatSpace heatSpace, 
-  HeatbugModelSwarm model,
-  int heatbugIndex,
-  int printDiagnostics
- )
-{
-    _world = world;
-    _heatSpace = heatSpace;
-    _model = model;
-    _heatbugIndex = heatbugIndex;
-    _printDiagnostics = printDiagnostics;
+    // The difference between my temperature and my ideal temperature:
+    public double unhappiness;
+    public double getUnhappiness () { 
+    	return unhappiness; 
+    }
 
-    if (_world == null)
-        System.err.println ("Heatbug was created without a world");
+    // The chance that I will move arbitrarily:
+    public double randomMoveProbability;
+    public void setRandomMoveProbability (double randomMoveProbability) { 
+    	this.randomMoveProbability = randomMoveProbability; 
+    }
 
-    if (_heatSpace == null)
-        System.err.println ("Heatbug was created without a heatSpace");
+    // My location in _world as well as in _heatSpace:
+    public int x, y;
 
-} /// constructor
+    // My index into the ColorMap defined in HeatbugModelSwarm:
+    public byte colorIndex;    
+    public void setColorIndex (byte colorIndex) { 
+    	this.colorIndex = colorIndex; 
+    }
 
-public Object drawSelfOn (Raster raster)
-{
-    raster.drawPointX$Y$Color (x, y, colorIndex);
-    return this;
-}
+    // The 2-dimensional world of motion:
+    private Grid2d _world;
+
+    // The 2-dimensional world of heat:
+    private HeatSpace _heatSpace;
+    
+    // The model I belong to:
+    private HeatbugModelSwarm _model;
+
+    // My index in the Heatbug list (needed only for diagnostics):
+    private int _heatbugIndex;
+
+    // The level of diagnostics to write to standard output:
+    private int _printDiagnostics = 0;
+    public void setPrintDiagnostics (int printDiagostics) { 
+    	_printDiagnostics = printDiagostics; 
+    }
+
+    public Heatbug (Grid2d world, HeatSpace heatSpace, HeatbugModelSwarm model,
+    		int heatbugIndex, int printDiagnostics) {
+    	_world = world;
+    	_heatSpace = heatSpace;
+    	_model = model;
+    	_heatbugIndex = heatbugIndex;
+    	_printDiagnostics = printDiagnostics;
+
+    	if (_world == null)
+    		System.err.println ("Heatbug was created without a world");
+
+    	if (_heatSpace == null)
+    		System.err.println ("Heatbug was created without a heatSpace");
+
+    } /// constructor
+
+    public Object drawSelfOn (Raster raster) {
+    	raster.drawPointX$Y$Color (x, y, colorIndex);
+    	return this;
+    }
 
 /**
 This method defines what the Heatbug does whenever the Schedule triggers it. 
@@ -168,155 +181,164 @@ cell to move to.
 There may be other methods in this simulation that should be synchronized. 
 
 */
-public synchronized void heatbugStep ()
-{
-    int newX, newY;
+    public synchronized void heatbugStep () {
+    	int newX, newY;
 
-    // Get the heat where I am sitting:
-    int heatHere = _heatSpace.getValueAtX$Y (x, y);
+    	// Get the heat where I am sitting:
+    	int heatHere = _heatSpace.getValueAtX$Y (x, y);
 
-    // Update my current unhappiness:
-    // int step = _model.getActivity ().getScheduleActivity ().getCurrentTime ();
-    unhappiness = Math.abs (idealTemperature - heatHere);
+    	// Update my current unhappiness:
+    	// int step = _model.getActivity ().getScheduleActivity ().getCurrentTime ();
+    	unhappiness = Math.abs (idealTemperature - heatHere);
 
-    if (unhappiness != 0 && ! _model.getImmobile ())
-    {
+    	if (unhappiness != 0 && ! _model.getImmobile ()) 
+    	{
 
-        double uDR = Globals.env.uniformDblRand.getDoubleWithMin$withMax (0.0, 1.0);
-        if (uDR < randomMoveProbability)
-        {
-            if (_printDiagnostics >= 100)
-                System.out.print ("Trying to move randomly ... ");
-            // Pick a random cell within the 9-cell neighborhood, applying
-            // geographic wrap-around:
-            newX =
-             (x + Globals.env.uniformIntRand.getIntegerWithMin$withMax (-1, 1)
-              + _world.getSizeX ()
-             ) % _world.getSizeX ();
-            newY =
-             (y + Globals.env.uniformIntRand.getIntegerWithMin$withMax (-1, 1)
-              + _world.getSizeY ()
-             ) % _world.getSizeY ();
-        } else
-        {
-            if (_printDiagnostics >= 100)
-                System.out.print ("Trying to move rationally ... ");
-            Point scratchPoint = new Point (x, y);
-            // Ask the HeatSpace for a cell in the 9-cell neighborhood
-            // with the closest-to-ideal temperature: 
-            _heatSpace.findExtremeType$X$Y
-             ((heatHere < idealTemperature ? HeatSpace.HOT : HeatSpace.COLD),
-              scratchPoint,   // scratchPoint is an inout parameter
-              _world
-             );
-            newX = scratchPoint.x;
-            newY = scratchPoint.y;
-        }
-        // ... Whether it chose randomly or rationally, a Heatbug may have
-        // chosen an already-occupied cell -- including the cell it occupies. 
-		// If it chose its own cell, the choice is about
-        // to be rejected, since the code below checks to see whether the cell
-        // is already occupied, without asking which Heatbug is occupying it:
-        if (_world.getObjectAtX$Y (newX, newY) != null)
-        {
-            int tries = 0;
-            int location, xm1, xp1, ym1, yp1;
-            // 10 is an arbitrary choice for the number of tries; it is
-            // *not* implied by the number of cells in the neighborhood:
-            while ((_world.getObjectAtX$Y (newX, newY) != null) && 
-                   (tries < 10)
-                  )
-            {
-                // Choose randomly among the 8 cells in the neighborhood
-                location = Globals.env.uniformIntRand.getIntegerWithMin$withMax (1,8);
-                xm1 = (x + _world.getSizeX () - 1) % _world.getSizeX ();
-                xp1 = (x + 1) % _world.getSizeX ();
-                ym1 = (y + _world.getSizeY () - 1) % _world.getSizeY ();
-                yp1 = (y + 1) % _world.getSizeY ();
-                switch (location)
-                {
-                case 1:  
-                    newX = xm1; newY = ym1;   // NW
-                break;  
-                case 2:
-                    newX = x ; newY = ym1;    // N
-                break;  
-                case 3:
-                    newX = xp1 ; newY = ym1;  // NE
-                break;  
-                case 4:
-                    newX = xm1 ; newY = y;    // W
-                break;  
-                case 5:
-                    newX = xp1 ; newY = y;    // E
-                break;  
-                case 6:
-                    newX = xm1 ; newY = yp1;  // SW
-                break;  
-                case 7:
-                    newX = x ; newY = yp1;    // S
-                break;  
-                case 8:
-                    newX = xp1 ; newY = yp1;  // SE
-                default:
-                break;
-                }
-                tries++;
-            }
-            if (tries == 10)
-            {
-                if (_printDiagnostics >= 100)
-                    System.out.println ("no, staying put ... ");
-                newX = x;
-                newY = y;
-            }
-            else
-            {
-                if (_printDiagnostics >= 100)
-                    System.out.println ("no, desperately ... ");
-            }
-        }
+    		double uDR = Globals.env.uniformDblRand.getDoubleWithMin$withMax (0.0, 1.0);
+    		if (uDR < randomMoveProbability)
+    		{
+    			if (_printDiagnostics >= 100)
+    				System.out.print ("Trying to move randomly ... ");
 
-        _heatSpace.addHeat (outputHeat, x, y);
-        _world.putObject$atX$Y (null, x, y);
-        x = newX;
-        y = newY;
-        _world.putObject$atX$Y (this, x, y);
+    			// Pick a random cell within the 9-cell neighborhood, applying
+    			// geographic wrap-around:
+    			newX =
+    				(x + Globals.env.uniformIntRand.getIntegerWithMin$withMax (-1, 1)
+    						+ _world.getSizeX ()
+    				) % _world.getSizeX ();
 
-    } /// if unhappiness != 0
-    else
-    {
-        if (_printDiagnostics >= 100)
-        {
-            System.out.println ("Too happy to move ... ");
-        }
-        _heatSpace.addHeat (outputHeat, x, y);
+    			newY =
+    				(y + Globals.env.uniformIntRand.getIntegerWithMin$withMax (-1, 1)
+    						+ _world.getSizeY ()
+    				) % _world.getSizeY ();
+    		} else {
+    			if (_printDiagnostics >= 100)
+    				System.out.print ("Trying to move rationally ... ");
+
+    			Point scratchPoint = new Point (x, y);
+    			
+    			// Ask the HeatSpace for a cell in the 9-cell neighborhood
+    			// with the closest-to-ideal temperature: 
+    			_heatSpace.findExtremeType$X$Y
+    			((heatHere < idealTemperature ? HeatSpace.HOT : HeatSpace.COLD),
+    					scratchPoint,   // scratchPoint is an inout parameter
+    					_world
+    			);
+            
+    			newX = scratchPoint.x;
+    			newY = scratchPoint.y;
+    		}
+
+    		// ... Whether it chose randomly or rationally, a Heatbug may have
+    		// chosen an already-occupied cell -- including the cell it occupies. 
+    		// If it chose its own cell, the choice is about
+    		// to be rejected, since the code below checks to see whether the cell
+    		// is already occupied, without asking which Heatbug is occupying it:
+    		if (_world.getObjectAtX$Y (newX, newY) != null)
+    		{
+    			int tries = 0;
+    			int location, xm1, xp1, ym1, yp1;
+    			
+    			// 10 is an arbitrary choice for the number of tries; it is
+    			// *not* implied by the number of cells in the neighborhood:
+    			while ((_world.getObjectAtX$Y (newX, newY) != null) && 
+    					(tries < 10)
+                  	)
+    			{
+    				// Choose randomly among the 8 cells in the neighborhood
+    				location = Globals.env.uniformIntRand.getIntegerWithMin$withMax (1,8);
+    				xm1 = (x + _world.getSizeX () - 1) % _world.getSizeX ();
+    				xp1 = (x + 1) % _world.getSizeX ();
+    				ym1 = (y + _world.getSizeY () - 1) % _world.getSizeY ();
+    				yp1 = (y + 1) % _world.getSizeY ();
+                
+    				switch (location) {
+    					case 1:  
+    						newX = xm1; newY = ym1;   // NW
+    						break;  
+    					
+    					case 2:
+    						newX = x ; newY = ym1;    // N
+    						break;  
+    					
+    					case 3:
+    						newX = xp1 ; newY = ym1;  // NE
+    						break;  
+    					
+    					case 4:
+    						newX = xm1 ; newY = y;    // W
+    						break;  
+
+    					case 5:
+    						newX = xp1 ; newY = y;    // E
+    						break;  
+
+    					case 6:
+    						newX = xm1 ; newY = yp1;  // SW
+    						break;  
+
+    					case 7:
+    						newX = x ; newY = yp1;    // S
+    						break;  
+                
+    					case 8:
+    						newX = xp1 ; newY = yp1;  // SE
+    					
+    					default:
+    						break;
+    				}
+    				tries++;
+    			}
+    			if (tries == 10)
+    			{
+    				if (_printDiagnostics >= 100)
+    					System.out.println ("no, staying put ... ");
+    				newX = x;
+    				newY = y;
+    			} else {
+    				if (_printDiagnostics >= 100)
+    					System.out.println ("no, desperately ... ");
+    			}
+    		}
+
+    		_heatSpace.addHeat (outputHeat, x, y);
+    		_world.putObject$atX$Y (null, x, y);
+    		x = newX;
+    		y = newY;
+    		_world.putObject$atX$Y (this, x, y);
+
+    	} /// if unhappiness != 0 
+    	 else {
+    		 if (_printDiagnostics >= 100)
+    		 {
+    			 System.out.println ("Too happy to move ... ");
+    		 }
+    		 _heatSpace.addHeat (outputHeat, x, y);
+    	 }
+
+    	if (_printDiagnostics >= 100)
+    		System.out.println ("Heatbug " + this);
+
+    } /// heatbugStep()
+
+    /**
+		This method does not check to see whether the target cell is already occupied.
+     */
+    public Object putAtX$Y (int inX, int inY) {
+    	x = inX;
+    	y = inY;
+    	_world.putObject$atX$Y (this, x, y);
+    	return this;
     }
 
-    if (_printDiagnostics >= 100)
-        System.out.println ("Heatbug " + this);
-
-} /// heatbugStep()
-
-/**
-This method does not check to see whether the target cell is already occupied.
-*/
-public Object putAtX$Y (int inX, int inY)
-{
-    x = inX;
-    y = inY;
-    _world.putObject$atX$Y (this, x, y);
-    return this;
-}
-
-/**
-The Java compiler will invoke this method whenever we use a Heatbug where the
-compiler is expecting a String. That gives us an easy way to print diagnostics;
-for example, System.out.println ("I initialized Heatbug " + heatbug + ".");.
-*/
-public String toString ()
-{
-    return _heatbugIndex + " at (" + x + "," + y + "), heat " + _heatSpace.getValueAtX$Y (x, y);
-}
+    /**
+		The Java compiler will invoke this method whenever we use a Heatbug where the
+		compiler is expecting a String. That gives us an easy way to print diagnostics;
+		for example, System.out.println ("I initialized Heatbug " + heatbug + ".");.
+     */
+    public String toString () {
+    	return _heatbugIndex + " at (" + x + "," + y + "), heat " + 
+    	_heatSpace.getValueAtX$Y (x, y);
+    }
 
 } /// class Heatbug

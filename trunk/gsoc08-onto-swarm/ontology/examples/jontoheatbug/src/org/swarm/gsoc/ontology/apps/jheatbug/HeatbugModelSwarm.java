@@ -172,66 +172,99 @@ Heatbug simulation:
 public class HeatbugModelSwarm extends SwarmImpl
 {
 
-// Variables referenced by an SCM file or (after Swarm 2.1.1) by a ProbeMap
-// must be public:
-public int numBugs = 101;
-    public void setNumBugs (int numBugs) 
-    { if (numBugs != -1) this.numBugs = numBugs; }
-    // ... See StartHeatbugs.java for an explanation of the value -1. 
-public int minIdealTemp = 17000;
-public int maxIdealTemp = 31000;
-public int minOutputHeat = 3000;
-public int maxOutputHeat = 10000;
-public boolean randomizeHeatbugUpdateOrder = false;
-public double randomMoveProbability = 0.4;
-    public double getRandomMoveProbability ()
-    { return randomMoveProbability; }
-    public void setRandomMoveProbability (double randomMoveProbability)
-    { this.randomMoveProbability = randomMoveProbability; }
-public int worldXSize = 80;
-public int worldYSize = 80;
-// Todo: diffusionConstant and some other variables are copies of
-// variables in Diffuse2d -- can we figure out a way to get rid of them?
-public double diffusionConstant = 1.0; 
-    // ... 0 = minimum, 1 = maximum diffusion of heat in _heatSpace.
-    public double getDiffusionConstant ()
-    { return diffusionConstant; }
-    public Object setDiffusionConstant (double diffusionConstant)
-    { this.diffusionConstant = diffusionConstant; return this; }
-public double evaporationRate = 0.99; 
-    // ... 0 = minimum, 1 = maximum retention of heat in _heatSpace.
-    public double getEvaporationRate ()
-    { return evaporationRate; }
-    public Object setEvaporationRate (double evaporationRate)
-    { this.evaporationRate = evaporationRate; return this; }
-// ... According to the documentation for Diffuse2d, newHeat = "evapRate * 
-// (self + diffusionConstant*(nbdavg - self)) where nbdavg is the weighted 
-// average of the 8 neighbours" -- but what does "weighted" mean?
+	// Variables referenced by an SCM file or (after Swarm 2.1.1) by a ProbeMap
+	// must be public:
+	public int numBugs = 101;
+    
+	public void setNumBugs (int numBugs) { 
+		// ... See StartHeatbugs.java for an explanation of the value -1.
+		if (numBugs != -1) this.numBugs = numBugs; 
+	}
+    
+	public int minIdealTemp = 17000;
+	public int maxIdealTemp = 31000;
+	public int minOutputHeat = 3000;
+	public int maxOutputHeat = 10000;
+	public boolean randomizeHeatbugUpdateOrder = false;	
+	
+	public double randomMoveProbability = 0.4;
+    public double getRandomMoveProbability () { 
+    	return randomMoveProbability; 
+    }    
+    public void setRandomMoveProbability (double randomMoveProbability) { 
+    	this.randomMoveProbability = randomMoveProbability; 
+    }
 
-private Schedule _modelSchedule;
-private ArrayList<Heatbug> _heatbugList;
-    public ArrayList<Heatbug> getHeatbugList ()
-    { return _heatbugList; }
-private Grid2d _world;
-    public Grid2d getWorld ()
-    { return _world; }
-private HeatSpace _heatSpace;
-    public HeatSpace getHeatSpace ()
-    { return _heatSpace; }
-private FActionForEach _actionForEach;
-private boolean _immobile = false;
-// ... If _immobile == true we will see what happens when Heatbugs never move. 
-    public boolean getImmobile () { return _immobile; }
-    public void setImmobile (boolean immobile) { _immobile = immobile; }
-private boolean _startInOneCluster = false;
-// ... If _startInOneCluster == true we will see what happens when Heatbugs all
-// start in a contiguous cluster.
-    public boolean getStartInOneCluster () { return _startInOneCluster; }
-    public void setStartInOneCluster (boolean startInOneCluster) 
-    { _startInOneCluster = startInOneCluster; }
+    public int worldXSize = 80;
+    public int worldYSize = 80;
+    
+    // TODO: diffusionConstant and some other variables are copies of
+    // variables in Diffuse2d -- can we figure out a way to get rid of them?
+    public double diffusionConstant = 1.0;     
+    // ... 0 = minimum, 1 = maximum diffusion of heat in _heatSpace.
+    public double getDiffusionConstant () { 
+    	return diffusionConstant; 
+    }    
+    public Object setDiffusionConstant (double diffusionConstant) { 
+    	this.diffusionConstant = diffusionConstant; 
+    	return this; 
+    }
+    
+    public double evaporationRate = 0.99; 
+    // ... 0 = minimum, 1 = maximum retention of heat in _heatSpace.
+    public double getEvaporationRate () { 
+    	return evaporationRate; 
+    }
+    public Object setEvaporationRate (double evaporationRate) { 
+    	this.evaporationRate = evaporationRate; return this; 
+    }
+    // ... According to the documentation for Diffuse2d, newHeat = "evapRate * 
+    // (self + diffusionConstant*(nbdavg - self)) where nbdavg is the weighted 
+    // average of the 8 neighbours" -- but what does "weighted" mean?
+
+    private Schedule _modelSchedule;
+    private ArrayList<Heatbug> _heatbugList;
+    public ArrayList<Heatbug> getHeatbugList () { 
+    	return _heatbugList; 
+    }
+
+    private Grid2d _world;
+    public Grid2d getWorld () { 
+    	return _world; 
+    }
+
+    private HeatSpace _heatSpace;
+    public HeatSpace getHeatSpace () { 
+    	return _heatSpace; 
+    }
+
+    private FActionForEach _actionForEach;
+    
+    private boolean _immobile = false;
+    // ... If _immobile == true we will see what happens when Heatbugs never move.    
+    public boolean getImmobile () { 
+    	return _immobile; 
+    }
+    
+    public void setImmobile (boolean immobile) { 
+    	_immobile = immobile; 
+    }
+
+    private boolean _startInOneCluster = false;
+    // ... If _startInOneCluster == true we will see what happens when Heatbugs all
+    // start in a contiguous cluster.
+    public boolean getStartInOneCluster () { 
+    	return _startInOneCluster; 
+    }
+    
+    public void setStartInOneCluster (boolean startInOneCluster) { 
+    	_startInOneCluster = startInOneCluster; 
+    }
+    
     public int printDiagnostics = 0;
-    public void setPrintDiagnostics (int printDiagnostics) 
-    { this.printDiagnostics = printDiagnostics; }
+    public void setPrintDiagnostics (int printDiagnostics) { 
+    	this.printDiagnostics = printDiagnostics; 
+    }
 
 /**
 The only task this constructor performs is to construct and install a ProbeMap. 
