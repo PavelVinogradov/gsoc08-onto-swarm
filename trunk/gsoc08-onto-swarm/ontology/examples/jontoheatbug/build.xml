@@ -56,6 +56,6 @@
 	</target>
 	
 	<target name="_modeljar">
-		<jar jarfile="${model.name}-model.jar" basedir="${model.compile.path}/${model.name}/" includes="**/*.class"/>
+		<jar jarfile="${model.out.path}/${model.name}-model.jar" basedir="${model.compile.path}/${model.name}/" includes="**/*.class"/>
 	</target>	
 </project>
