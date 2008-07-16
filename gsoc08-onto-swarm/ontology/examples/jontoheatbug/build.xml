@@ -45,7 +45,7 @@
 	</target>
 
 	<target name="_modelbuild">
-		<builder owlPath="${model.name}.owl" outPath="${model.compile.path}/${model.name}/"/>
+		<builder owlName="${model.name}" owlPath="./" outPath="${model.compile.path}/${model.name}/"/>
 	</target>
 	
 	<target name="_modelcompile">
@@ -54,5 +54,6 @@
 	
 	<target name="_modeljar">
 		<jar jarfile="${model.out.path}/${model.name}-model.jar" basedir="${model.compile.path}/${model.name}/" includes="**/*.class"/>
+		<jar jarfile="lib-sources/${model.name}-model-src.jar" basedir="${model.compile.path}/${model.name}/" includes="**/*.java"/>
 	</target>	
 </project>
