@@ -14,13 +14,22 @@ import java.io.BufferedWriter;
  * Time: 2:04:07
  */
 public class Clazz {
-    
+
+    private String packageName;
     public String className;
     public List<String> classInterfaces = new ArrayList<String>();
     public String classExtend;
     public List<Method> classMethods = new ArrayList<Method>();
     public List<Variable> classVariables = new ArrayList<Variable>();
     public List<Collection> classCollections = new ArrayList<Collection>();    
+
+    public Clazz(String modelName) {
+        packageName = "org.swarm.ontology." + modelName + ".model";
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
 
     public boolean addMethod(Method method) {
         if (classMethods.contains(method)) {
@@ -76,7 +85,7 @@ public class Clazz {
     
     @Override
     public String toString () {
-        String result = "";
+        String result = "package " + packageName + ";\n\n";
 
         if (classCollections.size() > 0) {
             result += "import java.util.*;\n\n";

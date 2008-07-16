@@ -14,19 +14,24 @@ import org.swarm.gsoc.ontology.model.ModelBuilder;
 public class BuildModelTask extends Task {
 
     private String owlPath;
+    private String owlName;
     private String outPath;
 
     public void execute () throws BuildException {
         
-        ModelBuilder builder = new ModelBuilder("file:" + owlPath);
+        ModelBuilder builder = new ModelBuilder("file:" + owlPath + owlName + ".owl");
 
-        builder.generate();
+        builder.generate(owlName);
         builder.write(outPath);
         builder.clear();
     }
 
     public void setOwlPath(String owlPath) {
         this.owlPath = owlPath;
+    }
+
+    public void setOwlName(String owlName) {
+        this.owlName = owlName;
     }
 
     public void setOutPath(String outPath) {

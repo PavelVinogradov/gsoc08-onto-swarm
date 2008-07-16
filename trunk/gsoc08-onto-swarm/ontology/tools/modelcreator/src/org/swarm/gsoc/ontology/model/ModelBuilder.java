@@ -9,6 +9,7 @@ import java.net.URI;
 import java.util.Set;
 import java.util.List;
 import java.util.LinkedList;
+import java.io.File;
 
 import uk.ac.manchester.cs.owl.*;
 
@@ -50,7 +51,7 @@ public class ModelBuilder {
 
     }
 
-    public void generate() {
+    public void generate(String modelName) {
         if (ontology == null) {
             loadOntology();
         }
@@ -60,7 +61,7 @@ public class ModelBuilder {
 
             System.out.println(cls.toString() + " : ");
 
-            Clazz clazz = new Clazz();
+            Clazz clazz = new Clazz(modelName);
             clazz.className = cls.toString();
 
             Set<OWLDescription> superClasses = cls.getSuperClasses(ontology);
@@ -166,6 +167,9 @@ public class ModelBuilder {
     }
 
     public void write(String outPath) {
+        if ( !(new File(outPath)).exists())
+            (new File(outPath)).mkdirs();
+
         ModelWriter writer = new SimpleJavaFileWriter(outPath);
         writer.generate(model);
     }
