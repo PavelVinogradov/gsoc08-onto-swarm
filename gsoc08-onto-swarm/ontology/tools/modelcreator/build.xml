@@ -18,6 +18,8 @@
             </classpath>
             
         </javac>
+        <mkdir dir="${out.path}/lib"/>
+        <copy file="lib/owlapi-bin.jar" todir="${out.path}/lib"/>
     </target>
 
     <target name="build" depends="compile">
@@ -29,8 +31,15 @@
                 <attribute name="Implementation-Vendor" value="SDG GSOC 2008"/>
                 <attribute name="Implementation-Title" value="WL model builder"/>
                 <attribute name="Implementation-Version" value="0.1.0"/>
+                <attribute name="Class-Path" value="lib/owlapi-bin.jar"/>
             </manifest>
         </jar>
-
     </target>
+
+    <taskdef name="builder" classname="org.swarm.gsoc.ontology.model.ant.BuildModelTask" classpath="lib/model-builder.jar;lib/owlapi-bin.jar"/>
+
+	<target name="generate">
+		<builder owlPath="examples/" owlName="heatbug" outPath="out/generated/"/>
+    </target>
+
 </project>

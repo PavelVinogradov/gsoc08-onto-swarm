@@ -13,7 +13,7 @@ public class Main {
         ModelBuilder builder = new ModelBuilder("file:/home/blaze/devel/IdeaProjects/OwlModelBuilder/examples/heatbug.owl");
         //ModelBuilder builder = new ModelBuilder("file:/home/blaze/pizza.owl");
 
-        builder.generate();
+        builder.generate("heatbug");
         builder.write("out/generated/");
         builder.clear();
     }

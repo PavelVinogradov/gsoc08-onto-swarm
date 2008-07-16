@@ -6,6 +6,7 @@ import org.swarm.gsoc.ontology.model.writer.ModelWriter;
 import java.util.List;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.File;
 
 /**
  * Created at NixDev.net.
@@ -31,12 +32,19 @@ public class SimpleJavaFileWriter implements ModelWriter {
     public boolean toFile (Clazz clazz) {
 
         try{
-            // Create file
-            FileWriter fstream = new FileWriter(path + clazz.className + ".java");
-            BufferedWriter out = new BufferedWriter(fstream);
-            out.write(clazz.toString());
-            //Close the output stream
-            out.close();
+            if (clazz.getPackageName() != null) {
+                String clazzPath = path + clazz.getPackageName().replace('.', '/') + "/";
+                
+                if ( !(new File(clazzPath)).exists())
+                    (new File(clazzPath)).mkdirs();
+
+                // Create file
+                FileWriter fstream = new FileWriter(clazzPath + clazz.className + ".java");
+                BufferedWriter out = new BufferedWriter(fstream);
+                out.write(clazz.toString());
+                //Close the output stream
+                out.close();
+            }
          } catch (Exception e){//Catch exception if any
             System.err.println("Error: " + e.getMessage());
             return false;
