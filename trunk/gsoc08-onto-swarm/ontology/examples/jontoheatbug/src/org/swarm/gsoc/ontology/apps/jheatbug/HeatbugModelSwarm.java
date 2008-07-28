@@ -777,7 +777,8 @@ public Object buildObjects ()
         // Initialize the rest of the Heatbug's state:
         heatbug.setIdealTemperature (idealTemp);
         heatbug.setOutputHeat (outputHeat);
-        heatbug.setRandomMoveProbability (randomMoveProbability);
+        //TODO: changes outside heatbug class
+        heatbug.setRandomMoveProbability ((float)randomMoveProbability);
 
         _world.setOverwriteWarnings (false);
         if (_startInOneCluster)

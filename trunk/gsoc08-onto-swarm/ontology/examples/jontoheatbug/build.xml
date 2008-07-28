@@ -19,7 +19,7 @@
 		</jar>
 	</target>    
 
-	<target name="model" depends="_init, _modelbuild, _modelcompile, _modeljar">
+	<target name="model" depends="_clean, _init, _modelbuild, _modelcompile, _modeljar">
 	</target>
 	
 	<target name="run">		
@@ -41,7 +41,7 @@
 	</target>
 	
 	<target name="_compile" depends="_clean, _init">				
-		<javac srcdir="src" destdir="build" classpath="${swarm.lib.path}/${swarm.lib.jar}" />
+		<javac srcdir="src" destdir="build" classpath="${swarm.lib.path}/${swarm.lib.jar}; ${model.out.path}/${model.name}-model.jar" />
 	</target>
 
 	<target name="_modelbuild">
