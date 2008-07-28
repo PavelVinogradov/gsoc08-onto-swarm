@@ -11,6 +11,8 @@ package org.swarm.gsoc.ontology.apps.jheatbug;
 
 import java.awt.*;
 
+import org.swarm.ontology.heatbug.model.MHeatBug;
+
 import swarm.Globals;
 import swarm.space.Grid2d;
 import swarm.gui.Raster;
@@ -90,45 +92,11 @@ behavior:
  </dir>
 
 */
-public class Heatbug {
-	// The amount of heat I produce (units are undefined):
-	public int outputHeat;
-    public Object setOutputHeat (int outputHeat) { 
-    	this.outputHeat = outputHeat; 
-    	return this; 
-    }
-    
-    // The temperature I prefer:
-    public int idealTemperature;
-    public int getIdealTemperature () { 
-    	return idealTemperature; 
-    }
-    public Object setIdealTemperature (int idealTemperature) { 
-    	this.idealTemperature = idealTemperature; 
-    	return this; 
-    }
-
-    // The difference between my temperature and my ideal temperature:
-    public double unhappiness;
-    public double getUnhappiness () { 
-    	return unhappiness; 
-    }
-
-    // The chance that I will move arbitrarily:
-    public double randomMoveProbability;
-    public void setRandomMoveProbability (double randomMoveProbability) { 
-    	this.randomMoveProbability = randomMoveProbability; 
-    }
-
+public class Heatbug extends MHeatBug {
+	
     // My location in _world as well as in _heatSpace:
     public int x, y;
-
-    // My index into the ColorMap defined in HeatbugModelSwarm:
-    public byte colorIndex;    
-    public void setColorIndex (byte colorIndex) { 
-    	this.colorIndex = colorIndex; 
-    }
-
+    
     // The 2-dimensional world of motion:
     private Grid2d _world;
 
@@ -138,22 +106,13 @@ public class Heatbug {
     // The model I belong to:
     private HeatbugModelSwarm _model;
 
-    // My index in the Heatbug list (needed only for diagnostics):
-    private int _heatbugIndex;
-
-    // The level of diagnostics to write to standard output:
-    private int _printDiagnostics = 0;
-    public void setPrintDiagnostics (int printDiagostics) { 
-    	_printDiagnostics = printDiagostics; 
-    }
-
     public Heatbug (Grid2d world, HeatSpace heatSpace, HeatbugModelSwarm model,
     		int heatbugIndex, int printDiagnostics) {
     	_world = world;
     	_heatSpace = heatSpace;
     	_model = model;
-    	_heatbugIndex = heatbugIndex;
-    	_printDiagnostics = printDiagnostics;
+    	setHeatbugIndex(heatbugIndex);
+    	setPrintDiagnostics(printDiagnostics);
 
     	if (_world == null)
     		System.err.println ("Heatbug was created without a world");
@@ -164,7 +123,8 @@ public class Heatbug {
     } /// constructor
 
     public Object drawSelfOn (Raster raster) {
-    	raster.drawPointX$Y$Color (x, y, colorIndex);
+    	//TODO: Fix Byte to Integer conversion
+    	raster.drawPointX$Y$Color (x, y, new Byte((new Integer(getColorIndex())).toString()));
     	return this;
     }
 
@@ -189,15 +149,15 @@ There may be other methods in this simulation that should be synchronized.
 
     	// Update my current unhappiness:
     	// int step = _model.getActivity ().getScheduleActivity ().getCurrentTime ();
-    	unhappiness = Math.abs (idealTemperature - heatHere);
+    	setUnhappiness(Math.abs (getIdealTemperature() - heatHere));
 
-    	if (unhappiness != 0 && ! _model.getImmobile ()) 
+    	if (getUnhappiness() != 0 && ! _model.getImmobile ()) 
     	{
 
     		double uDR = Globals.env.uniformDblRand.getDoubleWithMin$withMax (0.0, 1.0);
-    		if (uDR < randomMoveProbability)
+    		if (uDR < getRandomMoveProbability())
     		{
-    			if (_printDiagnostics >= 100)
+    			if (getPrintDiagnostics() >= 100)
     				System.out.print ("Trying to move randomly ... ");
 
     			// Pick a random cell within the 9-cell neighborhood, applying
@@ -212,7 +172,7 @@ There may be other methods in this simulation that should be synchronized.
     						+ _world.getSizeY ()
     				) % _world.getSizeY ();
     		} else {
-    			if (_printDiagnostics >= 100)
+    			if (getPrintDiagnostics() >= 100)
     				System.out.print ("Trying to move rationally ... ");
 
     			Point scratchPoint = new Point (x, y);
@@ -220,7 +180,7 @@ There may be other methods in this simulation that should be synchronized.
     			// Ask the HeatSpace for a cell in the 9-cell neighborhood
     			// with the closest-to-ideal temperature: 
     			_heatSpace.findExtremeType$X$Y
-    			((heatHere < idealTemperature ? HeatSpace.HOT : HeatSpace.COLD),
+    			((heatHere < getIdealTemperature() ? HeatSpace.HOT : HeatSpace.COLD),
     					scratchPoint,   // scratchPoint is an inout parameter
     					_world
     			);
@@ -291,17 +251,17 @@ There may be other methods in this simulation that should be synchronized.
     			}
     			if (tries == 10)
     			{
-    				if (_printDiagnostics >= 100)
+    				if (getPrintDiagnostics() >= 100)
     					System.out.println ("no, staying put ... ");
     				newX = x;
     				newY = y;
     			} else {
-    				if (_printDiagnostics >= 100)
+    				if (getPrintDiagnostics() >= 100)
     					System.out.println ("no, desperately ... ");
     			}
     		}
 
-    		_heatSpace.addHeat (outputHeat, x, y);
+    		_heatSpace.addHeat (getOutputHeat(), x, y);
     		_world.putObject$atX$Y (null, x, y);
     		x = newX;
     		y = newY;
@@ -309,14 +269,14 @@ There may be other methods in this simulation that should be synchronized.
 
     	} /// if unhappiness != 0 
     	 else {
-    		 if (_printDiagnostics >= 100)
+    		 if (getPrintDiagnostics() >= 100)
     		 {
     			 System.out.println ("Too happy to move ... ");
     		 }
-    		 _heatSpace.addHeat (outputHeat, x, y);
+    		 _heatSpace.addHeat (getOutputHeat(), x, y);
     	 }
 
-    	if (_printDiagnostics >= 100)
+    	if (getPrintDiagnostics() >= 100)
     		System.out.println ("Heatbug " + this);
 
     } /// heatbugStep()
@@ -337,7 +297,7 @@ There may be other methods in this simulation that should be synchronized.
 		for example, System.out.println ("I initialized Heatbug " + heatbug + ".");.
      */
     public String toString () {
-    	return _heatbugIndex + " at (" + x + "," + y + "), heat " + 
+    	return getHeatbugIndex() + " at (" + x + "," + y + "), heat " + 
     	_heatSpace.getValueAtX$Y (x, y);
     }
 

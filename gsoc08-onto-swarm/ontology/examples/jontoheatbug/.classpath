@@ -22,6 +22,6 @@
 	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/model-builder.jar"/>
 	<classpathentry kind="lib" path="lib/ant.jar"/>
-	<classpathentry kind="lib" path="lib/heatbug-model.jar"/>
+	<classpathentry kind="lib" path="lib/heatbug-model.jar" sourcepath="lib-sources/heatbug-model-src.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
