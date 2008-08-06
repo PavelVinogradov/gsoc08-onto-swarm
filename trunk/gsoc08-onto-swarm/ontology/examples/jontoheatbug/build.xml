@@ -14,7 +14,7 @@
 			<manifest>
 				<attribute name="Build-By" value="${project.developer}" />
 				<attribute name="Main-Class" value="${project.jar.mainclass}" />
-				<attribute name="Class-Path" value="${swarm.lib.path}/${swarm.lib.jar}"/>
+				<attribute name="Class-Path" value="${swarm.lib.path}/${swarm.lib.jar} ${swarm.lib.path}/${model.name}-model.jar"/>
 			</manifest>
 		</jar>
 	</target>    
