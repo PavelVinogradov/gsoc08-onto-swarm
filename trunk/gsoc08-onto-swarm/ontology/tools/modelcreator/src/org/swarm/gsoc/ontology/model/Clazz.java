@@ -19,6 +19,7 @@ public class Clazz {
     public String className;
     public List<String> classInterfaces = new ArrayList<String>();
     public String classExtend;
+    public String classDescr;
     public List<Method> classMethods = new ArrayList<Method>();
     public List<Variable> classVariables = new ArrayList<Variable>();
     public List<Collection> classCollections = new ArrayList<Collection>();    
@@ -89,6 +90,10 @@ public class Clazz {
 
         if (classCollections.size() > 0) {
             result += "import java.util.*;\n\n";
+        }
+
+        if (classDescr != null) {
+            result += "/* " + classDescr + " */\n";
         }
 
         result += "public class " + className;

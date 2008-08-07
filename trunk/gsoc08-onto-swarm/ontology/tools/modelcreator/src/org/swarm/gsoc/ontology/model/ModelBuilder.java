@@ -2,6 +2,7 @@ package org.swarm.gsoc.ontology.model;
 
 import org.semanticweb.owl.model.*;
 import org.semanticweb.owl.apibinding.OWLManager;
+import org.semanticweb.owl.vocab.OWLRDFVocabulary;
 import org.swarm.gsoc.ontology.model.writer.ModelWriter;
 import org.swarm.gsoc.ontology.model.writer.java.SimpleJavaFileWriter;
 
@@ -63,6 +64,9 @@ public class ModelBuilder {
 
             Clazz clazz = new Clazz(modelName);
             clazz.className = cls.toString();
+            for (OWLAnnotationAxiom axiom: cls.getAnnotationAxioms(ontology)) {
+                clazz.classDescr = axiom.getAnnotation().getAnnotationValueAsConstant().getLiteral().toString();
+            }
 
             Set<OWLDescription> superClasses = cls.getSuperClasses(ontology);
 
@@ -91,9 +95,22 @@ public class ModelBuilder {
                 // This is class attribute without default value
                 } else if (desc instanceof OWLDataAllRestrictionImpl) {
                     System.out.print("\tattribute " + desc);
-
                     OWLDataAllRestrictionImpl restriction = (OWLDataAllRestrictionImpl) desc;
-                    clazz.addVariable(new Variable(restriction.getProperty().toString(), restriction.getFiller().toString()));
+//                    restriction.
+//                    for (OWLAnnotation annotation : cls.getAnnotations(ontology, OWLRDFVocabulary.RDFS_COMMENT.getURI())) {
+//                         if (annotation.isAnnotationByConstant()) {
+//                             OWLConstant val = annotation.getAnnotationValueAsConstant();
+                             //if (!val.isTyped()) {
+                                 // The value isn't a typed constant, so we can safely obtain it
+                                 // as an OWLUntypedConstant and check the lang is Portuguese (pt)
+                                 //if (val.asOWLUntypedConstant().hasLang("pt")) {
+//                                     System.out.println("\t\t" + cls + " -> " + val.getLiteral());
+                                 //}
+                             //}
+//                         }
+//                     }
+
+                     clazz.addVariable(new Variable(restriction.getProperty().toString(), restriction.getFiller().toString()));
 
                 // This is class attribute with object type
                 } else if (desc instanceof OWLObjectExactCardinalityRestriction) {
