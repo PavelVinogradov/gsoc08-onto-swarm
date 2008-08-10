@@ -9,7 +9,7 @@
 		<echo>"Build ${project.name}"</echo>
 	</target>
 
-	<target name="build" depends="_compile">
+	<target name="build" depends="model, _compile">
 		<jar jarfile="${project.jar}" basedir="build" includes="**/*.class">
 			<manifest>
 				<attribute name="Build-By" value="${project.developer}" />
