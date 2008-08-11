@@ -1,5 +1,5 @@
 #labels Tutorial
-#Ant-based build system for Java Swarm application
+*Ant-based build system for Java Swarm application*
 
 = Introduction =
 Current version of Java Swarm examples built with legacy Makefile infrastructure. Most of Java developers not familiar with make tools and use standart 
