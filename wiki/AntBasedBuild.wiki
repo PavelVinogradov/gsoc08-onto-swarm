@@ -76,6 +76,7 @@ To use new build system for you app you need:
 		<javac srcdir="src" destdir="build" classpath="${swarm.lib.path}/${swarm.lib.jar}" />
 	</target>
 </project>
+  }}}
   * build.xml file provide three main target
     * build: compile project classes and package it in jar-file with proper Manifest file
     * run:   execute project jar with proper command-line parameters
