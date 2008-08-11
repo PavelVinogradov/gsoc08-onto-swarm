@@ -2,7 +2,7 @@
 #Ant-based build system for Java Swarm application
 
 = Introduction =
-	Current version of Java Swarm examples built with legacy Makefile infrastructure. Most of Java developers not familiar with make tools and use standart 
+Current version of Java Swarm examples built with legacy Makefile infrastructure. Most of Java developers not familiar with make tools and use standart 
 Java solutions like ant or maven to build complex projects. To solve this problem i develop simple and generic ant-based build system for Swarm application.
 
 = How to use =
