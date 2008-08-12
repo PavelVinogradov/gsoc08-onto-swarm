@@ -1,5 +1,5 @@
+#summary How to build latest version of Swarm in Debian or Ubuntu (with JSwarm)
 #labels Tutorial
-*How to build latest version of Swarm in Debian or Ubuntu (with JSwarm)*
 
 = Introduction =
 
