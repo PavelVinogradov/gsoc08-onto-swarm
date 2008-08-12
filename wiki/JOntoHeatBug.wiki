@@ -12,8 +12,9 @@ Source of this application is available from http://code.google.com/p/gsoc08-ont
   svn checkout http://gsoc08-onto-swarm.googlecode.com/svn/trunk/ gsoc08-onto-swarm-read-only
 }}}
 
-). Before usinf of this application 
-please read description of Ant-based build system and model generator library.
+). 
+
+Before usinf of this application please read description of Ant-based build system (AntBasedBuild) and model generator library(OwlModelBuilder).
 
 To compile this application you need:
   * swarm engine compiled with java support and installed on local machine
