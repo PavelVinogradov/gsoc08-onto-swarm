@@ -7,7 +7,12 @@ system (AntBasedBuild) and domain model generated from owl ontology by special l
 
 =Building=
 Source of this application is available from http://code.google.com/p/gsoc08-onto-swarm/ project (subversion repository
-svn checkout http://gsoc08-onto-swarm.googlecode.com/svn/trunk/ gsoc08-onto-swarm-read-only). Before usinf of this application 
+
+{{{
+  svn checkout http://gsoc08-onto-swarm.googlecode.com/svn/trunk/ gsoc08-onto-swarm-read-only
+}}}
+
+). Before usinf of this application 
 please read description of Ant-based build system and model generator library.
 
 To compile this application you need:
