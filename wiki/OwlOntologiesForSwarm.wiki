@@ -14,7 +14,7 @@ subset of OWL-DL language is supported. Supported expression of OWL-DL language 
   * Object All Restriction
 
 =Model Builder=
-Such support implemented with use of Model Builder library. To use owl ontology to model your application world you 
+Such support implemented with use of OwlModelBuilder library. To use owl ontology to model your application world you 
 must split application development on three phase:
   # Build owl model of application world. This model will include main concepts and properties of modelling world.
   # Generate Java model by using ant task BuildModelTask from model-builder.jar
