@@ -17,4 +17,5 @@ To compile this application you need:
 
 You can build and run all aplication by executing only one command from source tree root:
 *ant*
+
 This command refresh world model, build JOntoHeatBug as a single jar file with all dependencies and run with apropriate command line parameters.
