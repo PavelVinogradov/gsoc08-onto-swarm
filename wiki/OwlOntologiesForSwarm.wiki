@@ -23,6 +23,8 @@ must split application development on three phase:
 You can repeat this three steps many time to improve owl model. Updating java model not affected other parts of your application
 (except cases when you remove some properties or concepts from model).
 
+*Add description of ontology*
+
 =JENA-based solution=
 Another approach of ontology use is solution based on JENA library. This solution use JANE library to present modeling wold as 
 owl ontology with instances of modeling concepts. JENA library present interest functionality like
