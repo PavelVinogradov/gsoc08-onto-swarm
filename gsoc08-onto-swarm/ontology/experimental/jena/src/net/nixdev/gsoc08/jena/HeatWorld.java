@@ -1,3 +1,4 @@
+package net.nixdev.gsoc08.jena;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;

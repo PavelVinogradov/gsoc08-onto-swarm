@@ -1,3 +1,4 @@
+package net.nixdev.gsoc08.jena;
 import com.hp.hpl.jena.ontology.OntDocumentManager;
 import com.hp.hpl.jena.rdf.model.ModelMaker;
 
