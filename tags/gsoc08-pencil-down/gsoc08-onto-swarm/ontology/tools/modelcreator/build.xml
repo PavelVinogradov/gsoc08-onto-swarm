@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<project default="build">
+
+    <property name="src.path" value="src"/>
+    <property name="out.path" value="out/classes"/>
+
+    <target name="init">
+        <mkdir dir="${out.path}"/>
+    </target>
+   
+    <target name="compile" depends="init">
+        <javac srcdir="${src.path}" destdir="${out.path}">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+            
+        </javac>
+        <mkdir dir="${out.path}/lib"/>
+        <copy file="lib/owlapi-bin.jar" todir="${out.path}/lib"/>
+    </target>
+
+    <target name="build" depends="compile">
+        <jar basedir="${out.path}" destfile="model-builder.jar">
+            <manifest>
+                <!-- Who is building this jar? -->
+                <attribute name="Built-By" value="${user.name}"/>
+                <!-- Information about the program itself -->
+                <attribute name="Implementation-Vendor" value="SDG GSOC 2008"/>
+                <attribute name="Implementation-Title" value="WL model builder"/>
+                <attribute name="Implementation-Version" value="0.1.0"/>
+                <attribute name="Class-Path" value="lib/owlapi-bin.jar"/>
+            </manifest>
+        </jar>
+    </target>
+</project>

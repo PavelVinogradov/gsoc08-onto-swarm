@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="build_and_run">
+
+	<property file="build.properties" />
+	
+	<target name="build_and_run" depends="build, run" description="Build and run project">
+		<echo>"Build ${project.name}"</echo>
+	</target>
+
+	<target name="build" depends="_compile">
+	</target>    
+
+	<target name="run">		
+		<java classname="${project.mainclass}" fork="true" failonerror="true" maxmemory="128m">
+			<classpath>
+				<pathelement location="${lib.path}/jena.jar"/>
+				<pathelement location="${lib.path}/commons-logging-1.1.1.jar"/>
+				<pathelement location="${lib.path}/xercesImpl.jar"/>
+				<pathelement location="${lib.path}/iri.jar"/>
+				<pathelement location="${lib.path}/icu4j_3_4.jar"/>
+				<pathelement location="${lib.path}/concurrent.jar"/>
+				<pathelement location="./build"/>
+			</classpath>
+		</java>
+	</target>
+
+	<!-- Internal tasks and targets -->
+	<target name="_clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="_init">
+		<mkdir dir="build"/>
+	</target>
+	
+	<target name="_compile" depends="_clean, _init">				
+		<javac srcdir="src" destdir="build" classpath="${lib.path}/jena.jar" />
+	</target>
+</project>

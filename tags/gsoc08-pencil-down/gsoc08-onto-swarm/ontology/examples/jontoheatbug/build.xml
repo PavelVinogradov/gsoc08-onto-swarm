@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="build_and_run">
+
+	<property file="build.properties" />
+	
+	<taskdef name="builder" classname="org.swarm.gsoc.ontology.model.ant.BuildModelTask" classpath="lib/model-builder.jar;lib/owlapi-bin.jar"/>
+	
+	<target name="build_and_run" depends="build, run" description="Build and run project">
+		<echo>"Build ${project.name}"</echo>
+	</target>
+
+	<target name="build" depends="model, _compile">
+		<jar jarfile="${project.jar}" basedir="build" includes="**/*.class">
+			<manifest>
+				<attribute name="Build-By" value="${project.developer}" />
+				<attribute name="Main-Class" value="${project.jar.mainclass}" />
+				<attribute name="Class-Path" value="${swarm.lib.path}/${swarm.lib.jar} ${swarm.lib.path}/${model.name}-model.jar"/>
+			</manifest>
+		</jar>
+	</target>    
+
+	<target name="model" depends="_clean, _init, _modelbuild, _modelcompile, _modeljar">
+	</target>
+	
+	<target name="run">		
+		<java jar="${project.jar}" fork="true" failonerror="true" maxmemory="128m">					
+			<jvmarg value="-Djava.library.path=${swarm.native.path}" />
+		</java>
+	</target>
+
+	<!-- Internal tasks and targets -->
+	<target name="_clean">
+		<delete dir="build" />
+		<delete file="${project.jar}" />
+	</target>
+
+	<target name="_init">
+		<mkdir dir="build"/>
+		<mkdir dir="build/model"/>
+		<mkdir dir="build/model/${model.name}"/>
+	</target>
+	
+	<target name="_compile" depends="_clean, _init">				
+		<javac srcdir="src" destdir="build" classpath="${swarm.lib.path}/${swarm.lib.jar}; ${model.out.path}/${model.name}-model.jar" />
+	</target>
+
+	<target name="_modelbuild">
+		<builder owlName="${model.name}" owlPath="./" outPath="${model.compile.path}/${model.name}/"/>
+	</target>
+	
+	<target name="_modelcompile">
+		<javac srcdir="${model.compile.path}/${model.name}/" destdir="${model.compile.path}/${model.name}/"/>
+	</target>
+	
+	<target name="_modeljar">
+		<jar jarfile="${model.out.path}/${model.name}-model.jar" basedir="${model.compile.path}/${model.name}/" includes="**/*.class"/>
+		<jar jarfile="lib-sources/${model.name}-model-src.jar" basedir="${model.compile.path}/${model.name}/" includes="**/*.java"/>
+	</target>	
+</project>

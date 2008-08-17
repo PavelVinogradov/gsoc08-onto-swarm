@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/swarm.jar" sourcepath="lib-sources/swarm-src.zip"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/antlr-2.7.5.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/arq.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/arq-extra.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/concurrent.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/icu4j_3_4.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/iri.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/jena.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/jenatest.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/json.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/junit.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/lucene-core-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/stax-api-1.0.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/wstx-asl-3.0.0.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/root/workspace/JOntoHeatbug/lib/jena/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/model-builder.jar"/>
+	<classpathentry kind="lib" path="lib/ant.jar"/>
+	<classpathentry kind="lib" path="lib/heatbug-model.jar" sourcepath="lib-sources/heatbug-model-src.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
